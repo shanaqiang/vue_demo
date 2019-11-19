@@ -13,6 +13,14 @@
               <div class="lowin-group">
                 <label>邮箱</label>
                 <input type="email" autocomplete="email" name="email" class="lowin-input">
+                <button class="btn btn-warning mt-2" style="color:white;float: right;">获取验证码</button>
+              </div>
+
+              <div class="lowin-group">
+                <label>验证码</label>
+                <div class="form-inline">
+                  <input type="email" autocomplete="email" name="email" class="lowin-input">
+                </div>
               </div>
               <div class="lowin-group">
                 <label>密码</label>

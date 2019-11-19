@@ -20,6 +20,7 @@
 
               <div class="text-foot">
                 没有账户? <a href="/registry" class="register-link">注册</a>
+                <a href="/" class="register-link">浏览主页</a>
               </div>
             </div>
           </div>
@@ -42,6 +43,7 @@
       },
       methods:{
         login:function () {
+          const _this=this
           this.$axios({
             method: 'post',
             url: 'http://manage.woniu.com:10010/api/item/front/login',
@@ -51,6 +53,15 @@
             }
           }).then(function (response) {
             console.log(response)
+            if(response.data==1){
+              _this.$message("登陆成功");
+              setTimeout(function () {
+                location.href="/"
+              },2000)
+            }
+            if(response.data==0){
+              _this.$message("用户名或密码错误");
+            }
           })
         }
       },

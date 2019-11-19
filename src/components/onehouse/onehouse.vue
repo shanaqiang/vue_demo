@@ -5,27 +5,7 @@
     <div class="row">
       <div class="col-12 border border-1 border-success" style="height: 640px">
         <!--导航栏-->
-        <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top" style="height: 60px">
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="#">主页</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#">成为房东</a>
-              </li>
-              <li class="nav-item active">
-                <a class="nav-link" href="#">登录</a>
-              </li><li class="nav-item active">
-              <a class="nav-link" href="#">注册</a>
-            </li>
-            </ul>
-            <form class="form-inline my-2 my-lg-0">
-              <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">
-              <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
-            </form>
-          </div>
-        </nav>
+        <top></top>
 
         <div class="row" style="height: 640px">
           <div class="col col-6 border border-1">图片1</div>
@@ -181,8 +161,10 @@
 </template>
 
 <script>
+  import Top from '../navbars/topnavbar'
     export default {
       name:'App',
+      components:{Top}
     }
 </script>
 
