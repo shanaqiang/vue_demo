@@ -10,23 +10,54 @@
     </section><!--  end hero section  -->
 
 
-
-    <div class="tlinks">Collect from <a href="http://www.cssmoban.com/"  title="网站模板">网站模板</a></div>
     <section class="listings">
       <div class="wrapper">
         <ul class="properties_list">
           <li>
-            <a href="#">
-              <img src="img/property_1.jpg" alt="" title="" class="property_img"/>
-            </a>
-            <span class="price">$2500</span>
-            <div class="property_details">
-              <h1>
-                <a href="#">Fuisque dictum tortor at purus libero</a>
-              </h1>
-              <h2>2 kitchens, 2 bed, 2 bath... <span class="property_size">(288ftsq)</span></h2>
+            <div class="card" @click="toone()" style="width: 22rem;">
+              <img class="card-img-top" src="../../../static/img/homehouseimg/0b9eccbc-988f-4f53-8984-ef919d91a0b3.jpg" alt="Card image cap" />
+              <div class="card-body">
+                <div style="font-size: 10px;line-height: 20px;text-align: left;color: brown">整套公寓·1张床</div>
+                <div style="font-size: 20px;font-weight: bold;line-height: 30px;text-align: left" >这是房屋的标题，因为很长，所以我也要打很多字来测试,也要打很多字来测也要打很多字来测也要打很多字来测也要打很多字来测</div>
+                <div style="font-size: 20px;font-weight: bold;line-height: 30px;text-align: left" class="mt-2">￥998</div>
+              </div>
             </div>
           </li>
+
+          <li>
+            <div class="card" @click="toone()" style="width: 22rem;">
+              <img class="card-img-top" src="../../../static/img/homehouseimg/0b9eccbc-988f-4f53-8984-ef919d91a0b3.jpg" alt="Card image cap" />
+              <div class="card-body">
+                <div style="font-size: 10px;line-height: 20px;text-align: left;color: brown">整套公寓·1张床</div>
+                <div style="font-size: 20px;font-weight: bold;line-height: 30px;text-align: left" >这是房屋的标题，因为很长，所以我也要打很多字来测试,也要打很多字来测也要打很多字来测也要打很多字来测也要打很多字来测</div>
+                <div style="font-size: 20px;font-weight: bold;line-height: 30px;text-align: left" class="mt-2">￥998</div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="card" @click="toone()" style="width: 22rem;">
+              <img class="card-img-top" src="../../../static/img/homehouseimg/0b9eccbc-988f-4f53-8984-ef919d91a0b3.jpg" alt="Card image cap" />
+              <div class="card-body">
+                <div style="font-size: 10px;line-height: 20px;text-align: left;color: brown">整套公寓·1张床</div>
+                <div style="font-size: 20px;font-weight: bold;line-height: 30px;text-align: left" >这是房屋的标题，因为很长，所以我也要打很多字来测试,也要打很多字来测也要打很多字来测也要打很多字来测也要打很多字来测</div>
+                <div style="font-size: 20px;font-weight: bold;line-height: 30px;text-align: left" class="mt-2">￥998</div>
+              </div>
+            </div>
+          </li>
+
+          <li>
+            <div class="card" @click="toone()" style="width: 22rem;">
+              <img class="card-img-top" src="../../../static/img/homehouseimg/0b9eccbc-988f-4f53-8984-ef919d91a0b3.jpg" alt="Card image cap" />
+              <div class="card-body">
+                <div style="font-size: 10px;line-height: 20px;text-align: left;color: brown">整套公寓·1张床</div>
+                <div style="font-size: 20px;font-weight: bold;line-height: 30px;text-align: left" >这是房屋的标题，因为很长，所以我也要打很多字来测试,也要打很多字来测也要打很多字来测也要打很多字来测也要打很多字来测</div>
+                <div style="font-size: 20px;font-weight: bold;line-height: 30px;text-align: left" class="mt-2">￥998</div>
+              </div>
+            </div>
+          </li>
+
+
         </ul>
         <div class="more_listing">
           <a href="#" class="more_listing_btn">View More Listings</a>
@@ -99,6 +130,9 @@
       methods: {
         handleSelect(key, keyPath) {
           console.log(key, keyPath);
+        },
+        toone:function () {
+          location.href="/one"
         }
       }
     }

@@ -46,7 +46,7 @@
           const _this=this
           this.$axios({
             method: 'post',
-            url: 'http://manage.woniu.com:10010/api/item/front/login',
+            url: 'http://127.0.0.1:10010/api/item/front/login',
             data: {
               account:this.user.account,
               password:this.user.password,
