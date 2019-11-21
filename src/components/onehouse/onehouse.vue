@@ -68,7 +68,10 @@
         </div>
 
         <hr />
-        <div class="border border-1" style="width: 120px;height: 100px;padding: 10px"></div>
+        <div class="border border-1" style="width: 120px;height: 100px;padding: 10px;">
+          <div>卧室</div>
+          <div>张</div>
+        </div>
         <hr />
         <div class="form-inline mt-4">
           <div style="font-size: 18px;font-weight: bold">整套房子/公寓</div>
@@ -96,11 +99,25 @@
         <div>
           <div id="orderdate" style="text-align: left;margin-top: 70px;font-size: 25px;font-weight: bold">可订日期</div>
         </div>
-        <div class="border border-1" style="text-align: left;margin-top: 40px;height: 400px">此处是一个日期大插件</div>
+        <div class="border border-1" style="text-align: left;margin-top: 40px;height: 400px">
+          <div class="block">
+            <span class="demonstration">默认</span>
+            <el-date-picker
+              v-model="value6"
+              type="daterange"
+              range-separator="至"
+              start-placeholder="开始日期"
+              end-placeholder="结束日期"
+              :picker-options="pickerOptions">
 
-        <div id="location">
-          <div style="text-align: left;margin-top: 70px;font-size: 25px;font-weight: bold">位置</div>
-          <div class="border border-1" style="text-align: left;margin-top: 40px;height: 400px">此处是一个地图大插件</div>
+            </el-date-picker>
+          </div>
+        </div>
+        <div>
+          <div id="location">
+            <div style="text-align: left;margin-top: 70px;font-size: 25px;font-weight: bold">位置</div>
+            <div class="border border-1" style="text-align: left;margin-top: 40px;height: 400px">此处是一个地图大插件</div>
+          </div>
         </div>
 
         <div>
@@ -146,7 +163,8 @@
 
           <div class="mt-4">
             <div style="text-align: left;font-weight: bold">人数</div>
-            <input type="text" class="form-control">
+            <!--<input type="text" class="form-control">-->
+            <el-input-number v-model="num1":min="1" :max="housedetail.maxtenant" label="描述文字"></el-input-number>
           </div>
 
           <hr />
@@ -172,15 +190,33 @@
       components:{Top},
       data(){
         return{
-          housedetail:null,
-          houseimgs:[],
-          housecomments:[]
+          housedetail:{},//房屋详情
+          houseimgs:[],    //房屋图片
+          housecomments:[], //房屋评价
+          housebed:[],
+          value6:'',        //日期选择
+          num1:1,
+          pickerOptions: {}
         }
+      },
+      created(){
+
       },
       mounted(){
         this.getHouseData();
         this.getHouseImg();
         this.getHouseComment();
+        //this.getStartAndEndDate();
+      },
+      beforeUpdate() {
+        // console.log(this.housedetail.startdate);
+        // alert(this.housedetail.enddate);
+        // this.pickerOptions = {
+        //   disabledDate(time) {
+        //     //return time.getTime() < Date.now() - 8.64e7;
+        //    return time.getTime()<new Date(this.housedetail.enddate).getTime();
+        //   }
+        // }
       },
       methods:{
         getHouseData(){
@@ -188,7 +224,7 @@
             method:'get',
             url:'http://127.0.0.1:10010/api/item/house/housedetail/1'
           }).then(resp=>{
-            console.log(resp);
+             // console.log(resp);
              this.housedetail=resp.data;
           })
         },
@@ -197,7 +233,7 @@
             method:'get',
             url:'http://127.0.0.1:10010/api/item/house/houseimg/1'
           }).then(resp=>{
-            console.log(resp);
+            //console.log(resp);
             this.houseimgs=resp.data;
           })
         },
@@ -206,10 +242,29 @@
             method:'get',
             url:'http://127.0.0.1:10010/api/item/house/housecomment/1'
           }).then(resp=>{
-            console.log(resp);
+            //console.log(resp);
             this.housecomments=resp.data;
           })
         },
+        getStartAndEndDate(){
+          this.$axios({
+            method:'get',
+            url:'http://127.0.0.1:10010/api/item/house/startAndEndDate/1'
+          }).then(resp=>{
+            //console.log(resp);
+            this.rangedate=resp.data;
+          })
+        },
+        getHouseBed(){
+          this.$axios({
+            method:'get',
+            url:'http://127.0.0.1:10010/api/item/house/housebed/1'
+          }).then(resp=>{
+            //console.log(resp);
+            this.housebed=resp.data;
+          })
+        }
+
       },
 
     }
