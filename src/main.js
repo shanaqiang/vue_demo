@@ -38,6 +38,7 @@ import AddHouse03 from './components/addhouse/addhouse03'
 import AddHouse11 from './components/addhouse/addhouse11'
 import AddHouse12 from './components/addhouse/addhouse12'
 import AddHouse21 from './components/addhouse/addhouse21'
+import AddHouse00 from './components/addhouse/addhouse00'
 import Test from './components/test'
 const router=new Router({
   routes:[
@@ -53,6 +54,7 @@ const router=new Router({
     {path:"/addhouse11",component:AddHouse11},
     {path:"/addhouse12",component:AddHouse12},
     {path:"/addhouse21",component:AddHouse21},
+    {path:"/addhouse00",component:AddHouse00},
   ],
   mode:"history"
 })

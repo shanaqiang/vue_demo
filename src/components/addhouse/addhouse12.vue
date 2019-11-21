@@ -10,37 +10,26 @@
 
         <!--房源类型-->
         <div>
-          <div style="font-size: 25px;margin-top: 100px">向房客描述一下您的房源</div>
-
-          <div>为房源起一个能突出其独特之处的标题，吸引更多房客。</div>
-          <div class="mt-3">
-            <el-input
-              type="textarea"
-              placeholder="请输入内容"
-              v-model="textarea"
-              maxlength="50"
-              show-word-limit
-            >
-            </el-input>
-          </div>
-
-          <hr />
-          <div style="font-size: 25px;margin-top: 100px">向房客描述一下您的房源</div>
-          <div>请撰写房源简介。 不妨突出房源和街区的特别之处，以及您的待客之道有何特色。</div>
-          <div class="mt-3">
-            <el-input
-              type="textarea"
-              placeholder="请输入内容"
-              v-model="textarea1"
-              maxlength="500"
-              show-word-limit
-            >
-            </el-input>
-          </div>
-
+          <div style="font-size: 25px;margin-top: 100px">给房源添加照片</div>
         </div>
 
+        <div>
+          <el-upload
+            action="http://127.0.0.1:10010/api/item/upload/uploadimg"
+            name="file"
+            limit="5"
+            list-type="picture-card"
+            :on-success="uploaded"
+            :on-preview="handlePictureCardPreview"
+            :on-exceed="outlimit"
+            :on-remove="handleRemove">
+            <i class="el-icon-plus"></i>
+          </el-upload>
 
+          <el-dialog :visible.sync="dialogVisible">
+            <img width="100%" :src="dialogImageUrl" alt="">
+          </el-dialog>
+        </div>
 
         <div class="fixed-bottom offset-3 col-6" style="background-color: white">
           <hr />
@@ -69,11 +58,26 @@
     },
     data() {
       return {
-        textarea:'',
-        textarea1:'',
+        dialogImageUrl: '',
+        dialogVisible: false,
+
+        imgname:'',
       };
     },
     methods: {
+      handleRemove(file, fileList) {
+      },
+      handlePictureCardPreview(file) {
+        this.dialogImageUrl = file.url;
+        this.dialogVisible = true;
+      },
+      uploaded(response, file, fileList){
+        console.log(fileList)
+        this.imgname=response;
+      },
+      outlimit(files, fileList){
+        this.$message('最多只支持上传五张图片');
+      },
       before:()=>{
         location.href='/addhouse11'
       },

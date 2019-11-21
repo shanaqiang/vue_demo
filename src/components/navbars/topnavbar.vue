@@ -7,7 +7,7 @@
           <a class="nav-link" href="/">主页</a>
         </li>
         <li class="nav-item active">
-          <a class="nav-link" href="/addhouse">成为房东</a>
+          <a class="nav-link" href="/addhouse00">成为房东</a>
         </li>
         <li class="nav-item active">
           <a class="nav-link" href="/login">登录</a>
