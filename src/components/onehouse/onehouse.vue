@@ -3,21 +3,21 @@
 
     <!--顶部-->
     <div class="row">
-      <div class="col-12 border border-1 border-success" style="height: 640px">
+      <div class="col-12 border border-1 border-success" style="height: 440px">
         <!--导航栏-->
         <top></top>
 
-        <div class="row" style="height: 640px">
-          <div class="col col-6 border border-1">图片1</div>
+        <div class="row" style="height: 440px">
+          <div class="col col-6 border border-1 div1" ><img :src="houseimgs[0].img" style="width: 100%;height: 100%;"></div>
 
           <div class="col col-6 border border-1">
             <div class="row">
-              <div class="col col-6 border border-1" style="height: 320px">图片2</div>
-              <div class="col col-6 border border-1" style="height: 320px">图片3</div>
+              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimgs[1].img" height="100%" width="100%"></div>
+              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimgs[2].img" height="100%" width="100%"></div>
             </div>
             <div class="row">
-              <div class="col col-6 border border-1" style="height: 320px">图片4</div>
-              <div class="col col-6 border border-1" style="height: 320px">图片5</div>
+              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimgs[3].img" height="100%" width="100%"></div>
+              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimgs[4].img" height="100%" width="100%"></div>
             </div>
           </div>
 
@@ -30,26 +30,25 @@
     <!--中间-->
     <div class="row">
 
-      <div class="col offset-2 col-5 border border-1 border-dark">
+      <div class="col offset-1 col-6 border border-1 border-dark">
 
         <el-breadcrumb separator="·" class="mt-3">
-          <el-breadcrumb-item><a href="#">详情</a></el-breadcrumb-item>
-          <el-breadcrumb-item><a href="#">评价</a></el-breadcrumb-item>
-          <el-breadcrumb-item><a href="#">可订日期</a></el-breadcrumb-item>
-          <el-breadcrumb-item><a href="#">位置</a></el-breadcrumb-item>
-          <el-breadcrumb-item><a href="#">房东</a></el-breadcrumb-item>
+          <el-breadcrumb-item><a href="#detail">详情</a></el-breadcrumb-item>
+          <el-breadcrumb-item><a href="#comment">评价</a></el-breadcrumb-item>
+          <el-breadcrumb-item><a href="#orderdate">可订日期</a></el-breadcrumb-item>
+          <el-breadcrumb-item><a href="#location">位置</a></el-breadcrumb-item>
         </el-breadcrumb>
 
         <hr />
 
         <!--房屋简述-->
-        <h1>这是一个房屋的名称，大概字数有50个字左右ZSBDZWSBD</h1>
+        <h1 style="text-align: left">{{housedetail.hname}}</h1>
 
-        <div class="form-inline">
-          <div><i class="fas fa-door-open mr-2"></i>n间卧室</div>
-          <div class="ml-3"><i class="fas fa-bed mr-2"></i>n张床</div>
-          <div class="ml-3"><i class="fas fa-bath mr-2"></i>n间卫生间</div>
-          <div class="ml-3"><i class="fas fa-user-alt mr-2"></i>最多住n人</div>
+        <div class="form-inline" id="detail">
+          <div><i class="fas fa-door-open mr-2"></i>{{housedetail.bedroomnum}}间卧室</div>
+          <div class="ml-3"><i class="fas fa-bed mr-2"></i>{{housedetail.bednum}}张床</div>
+          <div class="ml-3"><i class="fas fa-bath mr-2"></i>{{housedetail.bathroomnum}}间卫生间</div>
+          <div class="ml-3"><i class="fas fa-user-alt mr-2"></i>最多住{{housedetail.maxtenant}}人</div>
         </div>
 
         <hr>
@@ -60,14 +59,12 @@
             <div class="block"><el-avatar :size="70" :src="circleUrl"></el-avatar></div>
           </div>
           <div style="margin-left: 10px;">
-            <div style="font-size: 20px;">房东：房东的名字 <a class="ml-2" href="#">联系房东</a></div>
+            <div style="font-size: 20px;">房东：{{housedetail.account}}<a class="ml-2" href="#">联系房东</a></div>
             <div class="mt-2" style="font-size: 15px;font-weight: bold;float:left">共收到n条评价·已验证</div>
           </div>
         </div>
-        <div style="background-color:#eaebeb;width: 100%;height: 100px">
-          <div style="text-align: left">房主留言房主留言房主留言房主留言房主留言房主留言房主留言房主留言房主留言房主留言
-            房主留言房主留言房主留言房主留言房主留言房主留言
-            房主留言房主留言房主留言房主留言房主留言房主留言房主留言房主留言房主留言</div>
+        <div style="background-color:#eaebeb;width: 100%;height: 100px;margin-top: 20px">
+          <div style="text-align: left">{{housedetail.description}}</div>
         </div>
 
         <hr />
@@ -83,17 +80,25 @@
         </div>
 
         <hr />
-        <div>
+        <div id="comment">
           <div style="text-align: left;margin-top: 70px;font-size: 25px;font-weight: bold">评价</div>
         </div>
-        <div style="text-align: left;margin-top: 40px">尚无评价</div>
-
+        <div style="text-align: left;margin-top: 30px" v-for="c in housecomments">
+          <hr>
+          <div style="float: left; margin-right: 20px"><img :src="c.headimg" style="height: 50px;width: 50px;border-radius:50px"></div>
+          <div>
+            {{c.account}}<br/>
+            {{c.createdate}}
+          </div>
+          <div style="margin-top: 10px">{{c.message}}</div>
+        </div>
+        <div class="text-center" style="margin-top: 20px;font-size: large"><a href="javascript:">查看更多评价</a></div>
         <div>
-          <div style="text-align: left;margin-top: 70px;font-size: 25px;font-weight: bold">可订日期</div>
+          <div id="orderdate" style="text-align: left;margin-top: 70px;font-size: 25px;font-weight: bold">可订日期</div>
         </div>
         <div class="border border-1" style="text-align: left;margin-top: 40px;height: 400px">此处是一个日期大插件</div>
 
-        <div>
+        <div id="location">
           <div style="text-align: left;margin-top: 70px;font-size: 25px;font-weight: bold">位置</div>
           <div class="border border-1" style="text-align: left;margin-top: 40px;height: 400px">此处是一个地图大插件</div>
         </div>
@@ -126,10 +131,10 @@
 
 
       <!--中间右侧-->
-      <div class="col col-3 border border-1 border-dark" style="height: 500px;">
+      <div class="col col-4 offset-1 border border-1 border-dark" style="height: 500px;">
         <div class="border border-1" style="padding: 20px;height: 450px;margin-top: 45px">
           <div class="form-inline">
-            <div style="font-size: 24px;font-weight: bold">￥999</div>
+            <div style="font-size: 24px;font-weight: bold">￥{{housedetail.price}}</div>
             <div style="font-size: 14px;margin-top: 10px;margin-left: 5px">每晚</div>
           </div>
 
@@ -164,10 +169,65 @@
   import Top from '../navbars/topnavbar'
     export default {
       name:'App',
-      components:{Top}
+      components:{Top},
+      data(){
+        return{
+          housedetail:null,
+          houseimgs:[],
+          housecomments:[]
+        }
+      },
+      mounted(){
+        this.getHouseData();
+        this.getHouseImg();
+        this.getHouseComment();
+      },
+      methods:{
+        getHouseData(){
+          this.$axios({
+            method:'get',
+            url:'http://127.0.0.1:10010/api/item/house/housedetail/1'
+          }).then(resp=>{
+            console.log(resp);
+             this.housedetail=resp.data;
+          })
+        },
+        getHouseImg(){
+          this.$axios({
+            method:'get',
+            url:'http://127.0.0.1:10010/api/item/house/houseimg/1'
+          }).then(resp=>{
+            console.log(resp);
+            this.houseimgs=resp.data;
+          })
+        },
+        getHouseComment(){
+          this.$axios({
+            method:'get',
+            url:'http://127.0.0.1:10010/api/item/house/housecomment/1'
+          }).then(resp=>{
+            console.log(resp);
+            this.housecomments=resp.data;
+          })
+        },
+      },
+
     }
+
 </script>
 
 <style>
+  .div1{
+    height: 440px;
+    overflow: hidden;
+  }
+  .div1 img{
+    cursor: pointer;
+    transition: all 0.6s;
+    transform: scale(1.2);
+  }
+  .div1 img:hover{
+    transform: scale(1.3);
+  }
 
 </style>
