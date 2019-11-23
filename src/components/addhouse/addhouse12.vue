@@ -60,8 +60,7 @@
       return {
         dialogImageUrl: '',
         dialogVisible: false,
-
-        imgname:'',
+        imgs:[],
       };
     },
     methods: {
@@ -73,7 +72,7 @@
       },
       uploaded(response, file, fileList){
         console.log(fileList)
-        this.imgname=response;
+        this.imgs=fileList
       },
       outlimit(files, fileList){
         this.$message('最多只支持上传五张图片');
@@ -81,8 +80,43 @@
       before:()=>{
         location.href='/addhouse11'
       },
-      next:()=>{
-        location.href="/addhouse"
+      next:function () {
+        if(this.imgs==''){
+          this.$message({
+            offset:400,
+            message:"请至少上传一张图片"
+          });
+        }else{
+          var arr=[];
+          for(var i=0;i<this.imgs.length;i++){
+            arr.push(this.imgs[i].response)
+          }
+          this.$axios({
+            method: 'post',
+            url: 'http://127.0.0.1:10010/api/item/house/addhouseimg',
+            data: {
+              //arr:JSON.stringify(arr),
+              arr:arr,
+            }
+          }).then(function (response) {
+            if(response==0){
+              this.$message({
+                offset:400,
+                message:"请求超时"
+              });
+            }
+            if(response==1){
+              this.$message({
+                offset:400,
+                message:"添加成功"
+              });
+            }
+            setTimeout(function () {
+              location.href="/addhouse"
+            },3000);
+          })
+        }
+
       }
     }
   }

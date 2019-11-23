@@ -14,7 +14,7 @@
           <div>选择要开放租房的日期。</div>
           <div class="mt-3">
             <el-date-picker
-              v-model="value1"
+              v-model="date"
               value-format="yyyy-MM-dd"
               :picker-options="pickerOptions"
               unlink-panels
@@ -24,7 +24,7 @@
               end-placeholder="结束日期">
             </el-date-picker>
           </div>
-          <div style="margin-top: 50px">{{value1}}</div>
+          <div style="margin-top: 50px">{{date}}</div>
 
         </div>
         <hr />
@@ -34,48 +34,53 @@
         <div style="margin-top: 20px">
           <div>适合儿童（2-12岁）</div>
           <div class="form-inline mt-2">
-            <el-radio v-model="radio" label="1">是</el-radio>
-            <el-radio v-model="radio" label="2">否</el-radio>
+            <el-radio v-model="houserule.child" label="1">是</el-radio>
+            <el-radio v-model="houserule.child" label="0">否</el-radio>
           </div>
         </div>
 
         <div style="margin-top: 20px">
           <div>适合婴幼儿（2岁以下）</div>
           <div class="form-inline mt-2">
-            <el-radio v-model="radio" label="1">是</el-radio>
-            <el-radio v-model="radio" label="2">否</el-radio>
+            <el-radio v-model="houserule.baby" label="1">是</el-radio>
+            <el-radio v-model="houserule.baby" label="0">否</el-radio>
           </div>
         </div>
 
         <div style="margin-top: 20px">
           <div>适合携带宠物入住</div>
           <div class="form-inline mt-2">
-            <el-radio v-model="radio" label="1">是</el-radio>
-            <el-radio v-model="radio" label="2">否</el-radio>
+            <el-radio v-model="houserule.pets" label="1">是</el-radio>
+            <el-radio v-model="houserule.pets" label="0">否</el-radio>
           </div>
         </div>
 
         <div style="margin-top: 20px">
           <div>允许吸烟</div>
           <div class="form-inline mt-2">
-            <el-radio v-model="radio" label="1">是</el-radio>
-            <el-radio v-model="radio" label="2">否</el-radio>
+            <el-radio v-model="houserule.smoking" label="1">是</el-radio>
+            <el-radio v-model="houserule.smoking" label="0">否</el-radio>
           </div>
         </div>
 
         <div style="margin-top: 20px">
           <div>允许举办活动或聚会</div>
           <div class="form-inline mt-2">
-            <el-radio v-model="radio" label="1">是</el-radio>
-            <el-radio v-model="radio" label="2">否</el-radio>
+            <el-radio v-model="houserule.party" label="1">是</el-radio>
+            <el-radio v-model="houserule.party" label="0">否</el-radio>
           </div>
         </div>
 
         <hr />
         <div style="font-size: 25px;margin-top: 20px">为房源定价</div>
         <div style="margin-top: 10px">
-          <el-input v-model="input" placeholder="¥"></el-input>
+          <el-form :model="numberValidateForm" :rules="rules" ref="numberValidateForm" label-width="100px" class="demo-ruleForm">
+            <el-form-item label="价格：" prop="price">
+              <el-input v-model.number="numberValidateForm.price" placeholder="¥" style="width: 300px"></el-input>
+            </el-form-item>
+          </el-form>
         </div>
+
 
 
         <div style="margin-top: 200px"></div>
@@ -89,7 +94,7 @@
         <hr />
         <div style="height: 60px">
           <div style="float: left"><el-button type="danger" style="width: 140px;height: 50px" @click="before">返回</el-button></div>
-          <div style="float: right"><el-button type="danger" style="width: 140px;height: 50px" @click="dialogVisible = true">完成</el-button></div>
+          <div style="float: right"><el-button type="danger" style="width: 140px;height: 50px" @click="next">完成</el-button></div>
         </div>
       </div>
 
@@ -118,7 +123,23 @@
     },
     data() {
       return {
-        value1:'',
+        date:'',
+        houserule:{
+          child:'',
+          baby:'',
+          pets:'',
+          smoking:'',
+          party:'',
+        },
+        numberValidateForm: {
+          price:'',
+        },
+        rules:{
+          price:[
+            { required: true, message: '价格不能为空'},
+            { type: 'number', message: '价格必须为数字值'}
+          ]
+        },
         dialogVisible: false,
         pickerOptions: {
           disabledDate(time) {
@@ -128,18 +149,28 @@
       };
     },
     methods: {
-      before:()=>{
-        location.href='/addhouse'
+      before: () => {
+        location.href = '/addhouse'
       },
-      gohome:()=>{
-        location.href="/"
+      next: function () {
+        if (date == '') {
+          this.$message("请选择日期")
+        }
+        if (houserule.child == '') {
+
+        }
+
+      },
+      gohome: () => {
+        location.href = "/"
       },
       handleClose(done) {
         this.$confirm('确认关闭？')
           .then(_ => {
             done();
           })
-          .catch(_ => {});
+          .catch(_ => {
+          });
       },
     }
   }

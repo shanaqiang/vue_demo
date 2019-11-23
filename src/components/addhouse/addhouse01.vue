@@ -11,49 +11,64 @@
         <!--房源类型-->
         <div>
           <div style="font-size: 25px;margin-top: 100px">房源类型</div>
+          <div id="type">
+            <div style="padding: 10px;float: left">
+              <div style="width: 120px;height: 35px;text-align: center;line-height: 35px;border-radius: 5px;" class="brown" value="0">
+                公寓型住宅
+              </div>
+            </div>
 
-          <div style="padding: 10px;float: left">
-            <div style="background-color:#eaebeb;width: 120px;height: 35px;text-align: center;line-height: 35px;border-radius: 5px;">公寓型住宅</div>
-          </div>
+            <div style="padding: 10px;float: left">
+              <div style="width: 120px;height: 35px;text-align: center;line-height: 35px;border-radius: 5px;" class="brown" value="1">
+                独栋房
+              </div>
+            </div>
 
-          <div style="padding: 10px;float: left">
-            <div style="background-color:#eaebeb;width: 120px;height: 35px;text-align: center;line-height: 35px;border-radius: 5px;">公寓型住宅</div>
-          </div>
+            <div style="padding: 10px;float: left">
+              <div style="width: 120px;height: 35px;text-align: center;line-height: 35px;border-radius: 5px;" class="brown" value="2">
+                别墅
+              </div>
+            </div>
 
-          <div style="padding: 10px;float: left">
-            <div style="background-color:#eaebeb;width: 120px;height: 35px;text-align: center;line-height: 35px;border-radius: 5px;">公寓型住宅</div>
-          </div>
+            <div style="padding: 10px;float: left">
+              <div style="width: 120px;height: 35px;text-align: center;line-height: 35px;border-radius: 5px;" class="brown" value="3">
+                loft
+              </div>
+            </div>
 
-          <div style="padding: 10px;float: left">
-            <div style="background-color:#eaebeb;width: 120px;height: 35px;text-align: center;line-height: 35px;border-radius: 5px;">公寓型住宅</div>
+            <div style="padding: 10px;float: left">
+              <div style="width: 120px;height: 35px;text-align: center;line-height: 35px;border-radius: 5px;" class="brown" value="4">
+                酒店
+              </div>
+            </div>
           </div>
         </div>
 
         <!--出租类型-->
-        <div>
+        <div id="rentaltype">
           <div style="font-size: 25px;margin-top: 100px">出租类型</div>
 
           <div style="padding: 10px;position: relative;display: inline-block">
-            <div style="background-color:#eaebeb;width: 220px;height: 250px;border-radius: 5px;">
+            <div style="width: 220px;height: 250px;border-radius: 5px;" class="brown rental" value="0">
               <div style="padding: 20px;"><i class="fa fa-home fa-3x" aria-hidden="true"></i></div>
-              <div class="ml-3" style="font-size: 20px;font-weight: bold">整个房源</div>
-              <div class="ml-2 mr-3" style="font-size: 16px;padding: 10px">房客独享整个房源，无需与您或他人共住</div>
+              <div style="font-size: 20px;font-weight: bold;margin-left: 20px">整个房源</div>
+              <div style="font-size: 16px;padding: 10px;margin-left: 10px;margin-right: 20px">房客独享整个房源，无需与您或他人共住</div>
             </div>
           </div>
 
           <div style="padding: 10px;position: relative;display: inline-block">
-            <div style="background-color:#eaebeb;width: 220px;height: 250px;border-radius: 5px;">
+            <div style="width: 220px;height: 250px;border-radius: 5px;" class="brown rental" value="1">
               <div style="padding: 20px;"><i class="fa fa-key fa-3x" aria-hidden="true"></i></div>
-              <div class="ml-3" style="font-size: 20px;font-weight: bold">独立房间</div>
-              <div class="ml-2 mr-3" style="font-size: 16px;padding: 10px">房客有自己独立的房间，与他人共享客厅等空间</div>
+              <div style="font-size: 20px;font-weight: bold;margin-left: 20px">独立房间</div>
+              <div style="font-size: 16px;padding: 10px;margin-left: 10px;">房客有自己独立的房间，与他人共享客厅等空间</div>
             </div>
           </div>
 
           <div style="padding: 10px;position: relative;display: inline-block">
-            <div style="background-color:#eaebeb;width: 220px;height: 250px;border-radius: 5px;">
+            <div style="width: 220px;height: 250px;border-radius: 5px;" class="brown rental" value="2">
               <div style="padding: 20px;"><i class="fa fa-bed fa-3x" aria-hidden="true"></i></div>
-              <div class="ml-3" style="font-size: 20px;font-weight: bold">合住房间</div>
-              <div class="ml-2 mr-3" style="font-size: 16px;padding: 10px">房客住在与他人合用的卧室或公共区域</div>
+              <div style="font-size: 20px;font-weight: bold;margin-left: 20px">合住房间</div>
+              <div style="font-size: 16px;padding: 10px;margin-left: 10px;margin-right: 20px">房客住在与他人合用的卧室或公共区域</div>
             </div>
           </div>
 
@@ -61,7 +76,7 @@
           <div class="form-inline">
             <div style="font-size: 25px;margin-top: 100px">最多容纳房客数:</div>
             <div style="margin-top: 100px;margin-left: 50px">
-              <el-input-number v-model="num1" :min="1" :max="16" label="房客"></el-input-number>
+              <el-input-number v-model="maxtenant" :min="1" :max="16" label="房客"></el-input-number>
             </div>
             <div style="margin-top: 100px;margin-left: 20px">人</div>
           </div>
@@ -70,7 +85,7 @@
           <div class="form-inline">
             <div style="font-size: 25px;margin-top: 100px">卧室数量:</div>
             <div style="margin-top: 100px;margin-left: 125px">
-              <el-input-number v-model="num2" :min="1" :max="20" label="卧室"></el-input-number>
+              <el-input-number v-model="bedroomnum" :min="1" :max="20" label="卧室"></el-input-number>
             </div>
             <div style="margin-top: 100px;margin-left: 20px">间</div>
           </div>
@@ -79,7 +94,7 @@
           <div class="form-inline">
             <div style="font-size: 25px;margin-top: 100px">床铺数量:</div>
             <div style="margin-top: 100px;margin-left: 125px">
-              <el-input-number v-model="num3" :min="1" :max="20" label="床铺"></el-input-number>
+              <el-input-number v-model="bednum" :min="1" :max="20" label="床铺"></el-input-number>
             </div>
             <div style="margin-top: 100px;margin-left: 20px">床</div>
           </div>
@@ -88,7 +103,7 @@
           <div class="form-inline">
             <div style="font-size: 25px;margin-top: 100px">卫生间数量:</div>
             <div style="margin-top: 100px;margin-left: 100px">
-              <el-input-number v-model="num4" :min="0" :max="20" :precision="1" :step="0.5" label="卫生间"></el-input-number>
+              <el-input-number v-model="bathroomnum" :min="0" :max="20" :precision="1" :step="0.5" label="卫生间"></el-input-number>
             </div>
             <div style="margin-top: 100px;margin-left: 20px">间（没有淋浴区或浴缸的卫生间算半个卫生间。）</div>
           </div>
@@ -111,13 +126,29 @@
 
 <script>
   import topBar from '../navbars/topnavbar'
+
+  var housetype=''
+  var rentaltype=''
+  $(function () {
+    $("#type div div").click(function () {
+      housetype=$(this).attr("value")
+      $("#type div div").attr("class","brown")
+      $(this).attr("class","gold")
+    }),
+
+      $("#rentaltype .rental").click(function () {
+        rentaltype=$(this).attr("value")
+        $("#rentaltype .rental").attr("class","brown rental")
+        $(this).attr("class","gold rental")
+      })
+  })
     export default {
       data() {
         return {
-          num1:1,
-          num2:1,
-          num3:1,
-          num4:1,
+          maxtenant:1,
+          bedroomnum:1,
+          bednum:1,
+          bathroomnum:1,
         };
       },
       components:{
@@ -128,12 +159,55 @@
           location.href="/addhouse"
         },
         next:function () {
-          location.href="/addhouse02"
+          const _this=this;
+          if((housetype=='')||(rentaltype=='')){
+            this.$message({
+              offset:400,
+              message:"请填写完整信息"
+            });
+            return
+          }
+          this.$axios({
+            method: 'post',
+            url: 'http://127.0.0.1:10010/api/item/house/addhousetype',
+            data: {
+              housetype:housetype,
+              rentaltype:rentaltype,
+              maxtenant:_this.maxtenant,
+              bedroomnum:_this.bedroomnum,
+              bednum:_this.bednum,
+              bathroomnum:_this.bathroomnum,
+            }
+          }).then(function (response) {
+            location.href="/addhouse02"
+          })
+
+        },
+        over:function (obj) {
+          alert($(obj).attr("style"))
         }
+      },
+      updated:function () {
+
       }
+
     }
+
+
+
 </script>
 
 <style>
+.brown{
+  background-color:#eaebeb;
+}
+.red{
+  background-color:#D0EF84;
+}
+  .rental{
 
+  }
+  .gold{
+    background-color:#ffff99;
+  }
 </style>
