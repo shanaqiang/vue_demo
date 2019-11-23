@@ -12,11 +12,15 @@ import '../node_modules/bootstrap/dist/js/bootstrap.min'
 
 import axios from 'axios';
 Vue.prototype.$axios = axios;
+axios.defaults.withCredentials=true;
+
 
 import fontawesome from '@fortawesome/fontawesome'
 import solid from '@fortawesome/fontawesome-free-solid'
 import regular from '@fortawesome/fontawesome-free-regular'
 import brands from '@fortawesome/fontawesome-free-brands'
+import BaiduMap from 'vue-baidu-map'
+import { provinceAndCityData, regionData, provinceAndCityDataPlus, regionDataPlus, CodeToText, TextToCode } from 'element-china-area-data'
 fontawesome.library.add(solid)
 fontawesome.library.add(regular)
 fontawesome.library.add(brands)
@@ -26,6 +30,9 @@ Vue.config.productionTip = false
 
 Vue.use(Router)
 Vue.use(ElementUI)
+Vue.use(BaiduMap, {
+  ak: 'VOdEb8mxTIU3h8GUQtuswmL65rpW5d2d'    //这个地方是官方提供的ak密钥
+})
 /* eslint-disable no-new */
 import Home from './components/home/homepage'
 import OneHouse from './components/onehouse/onehouse'

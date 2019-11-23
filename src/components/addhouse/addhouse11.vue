@@ -86,16 +86,15 @@
         }else{
           this.$axios({
             method: 'post',
-            url: 'http://127.0.0.1:10010/api/item/house/addhouse',
+            url: 'http://127.0.0.1:10010/api/item/house/addhousename',
             data: {
               hname:this.hname,
               description:this.description,
             }
           }).then(function (response) {
-
+            location.href="/addhouse12"
           })
         }
-        //location.href="/addhouse12"
       }
     }
   }
