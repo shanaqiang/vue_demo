@@ -152,15 +152,44 @@
       before: () => {
         location.href = '/addhouse'
       },
+
+
       next: function () {
-        if (date == '') {
+        if (this.date == '') {
           this.$message("请选择日期")
+          return
         }
-        if (houserule.child == '') {
-
+        if ((this.houserule.child == '')||(this.houserule.baby == '')||(this.houserule.pets == '')
+          ||(this.houserule.smoking == '')||(this.houserule.party == '')) {
+          this.$message("请选择房屋守则")
+          return
         }
+        if(this.numberValidateForm.price==''){
+          this.$message("请输入房子的价格")
+          return
+        }
+        this.$axios({
+          method: 'post',
+          url: 'http://127.0.0.1:10010/api/item/house/addhouserule',
+          data:
+            this.houserule,
 
+        }).then(function (response) {
+        });
+        this.$axios({
+          method: 'post',
+          url: 'http://127.0.0.1:10010/api/item/house/addhouse02',
+          data: {
+            startdate:this.date[0],
+            enddate:this.date[1],
+            price:this.numberValidateForm.price,
+          }
+        }).then(function (response) {
+        });
+        this.dialogVisible=true
       },
+
+
       gohome: () => {
         location.href = "/"
       },
