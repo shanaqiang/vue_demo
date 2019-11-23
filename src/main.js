@@ -36,6 +36,7 @@ Vue.use(BaiduMap, {
 /* eslint-disable no-new */
 import Home from './components/home/homepage'
 import OneHouse from './components/onehouse/onehouse'
+import HouseComment from './components/comment/housecomment'
 import Login from './components/login/loginview'
 import Registry from './components/login/registryview'
 import AddHouse from './components/addhouse/addhouse'
@@ -51,6 +52,7 @@ const router=new Router({
   routes:[
     {path:"/",component:Home},
     {path:"/one",component:OneHouse},
+    {path:"/comment",component:HouseComment},
     {path:"/login",component:Login},
     {path:"/registry",component:Registry},
     {path:"/addhouse01",component:AddHouse01},
