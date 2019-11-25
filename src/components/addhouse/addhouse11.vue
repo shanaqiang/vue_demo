@@ -92,7 +92,14 @@
               description:this.description,
             }
           }).then(function (response) {
-            location.href="/addhouse12"
+            if(response==1){
+              location.href="/addhouse12"
+            }else{
+              _this.$message("会话超时")
+              setTimeout(function () {
+                location.href="/addhouse00"
+              },2000)
+            }
           })
         }
       }

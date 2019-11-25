@@ -171,10 +171,16 @@
         this.$axios({
           method: 'post',
           url: 'http://127.0.0.1:10010/api/item/house/addhouserule',
-          data:
-            this.houserule,
-
+          data: this.houserule,
         }).then(function (response) {
+          if(response==1){
+
+          }else{
+            this.$message("会话超时")
+            setTimeout(function () {
+              location.href="/addhouse00"
+            },2000)
+          }
         });
         this.$axios({
           method: 'post',
@@ -185,8 +191,15 @@
             price:this.numberValidateForm.price,
           }
         }).then(function (response) {
+          if(response==1){
+            this.dialogVisible=true
+          }else{
+            this.$message("会话超时")
+            setTimeout(function () {
+              location.href="/addhouse00"
+            },2000)
+          }
         });
-        this.dialogVisible=true
       },
 
 
