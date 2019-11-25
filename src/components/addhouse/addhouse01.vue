@@ -179,7 +179,14 @@
               bathroomnum:_this.bathroomnum,
             }
           }).then(function (response) {
-            location.href="/addhouse02"
+            if(response==1){
+              location.href="/addhouse02"
+            }else{
+              _this.$message("会话超时")
+              setTimeout(function () {
+                location.href="/addhouse00"
+              },2000)
+            }
           })
 
         },

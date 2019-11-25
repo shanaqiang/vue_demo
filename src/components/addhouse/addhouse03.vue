@@ -214,7 +214,14 @@
           data: _this.houseinstallations,
 
         }).then(function (response) {
-          location.href="/addhouse"
+          if(response==1){
+            location.href="/addhouse"
+          }else{
+            _this.$message("会话超时")
+            setTimeout(function () {
+              location.href="/addhouse00"
+            },2000)
+          }
         })
         //location.href="/addhouse"
       }

@@ -111,7 +111,14 @@
             city:this.city,
           }
         }).then(function (response) {
-          location.href="/addhouse03"
+          if(response==1){
+            location.href="/addhouse03"
+          }else{
+            this.$message("会话超时")
+            setTimeout(function () {
+              location.href="/addhouse00"
+            },2000)
+          }
         })
       },
       handleChange (value) {

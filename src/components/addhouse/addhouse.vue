@@ -9,19 +9,19 @@
           <div style="font-size: 14px;font-weight: bold;margin-top: 50px">步骤1</div>
           <div style="font-size: 25px;">添加房源详情</div>
           <div>添加照片、简短描述、标题</div>
-          <el-button style="background-color: #44a0b3;color: white;margin-top: 10px" @click="goadd02">立即添加</el-button>
+          <el-button type="primary" style="margin-top: 10px" @click="goadd02" :disabled="isDisabled01">立即添加</el-button>
 
           <hr />
           <div style="font-size: 14px;font-weight: bold;margin-top: 50px">步骤2</div>
           <div style="font-size: 25px;">添加房屋配置</div>
           <div>添加床、浴室、便利设施等等</div>
-          <el-button style="background-color: #44a0b3;color: white;margin-top: 10px" @click="goadd01">立即添加</el-button>
+          <el-button type="primary" style="margin-top: 10px" @click="goadd01" :disabled="isDisabled02">立即添加</el-button>
 
           <hr />
           <div style="font-size: 14px;font-weight: bold;margin-top: 50px">步骤3</div>
           <div style="font-size: 25px;">最好准备接待访客</div>
           <div>决定价格、预订设置和日历</div>
-          <el-button style="background-color: #44a0b3;color: white;margin-top: 10px" @click="goadd03">立即添加</el-button>
+          <el-button type="primary" style="margin-top: 10px" @click="goadd03" :disabled="isDisabled03">立即添加</el-button>
         </div>
       </div>
 
@@ -39,6 +39,13 @@
 
 <script>
     export default {
+      data() {
+        return{
+            isDisabled01:true,
+            isDisabled02:false,
+            isDisabled03:false,
+        }
+      },
       methods:{
         goadd01:()=>{
           location.href='/addhouse01'
@@ -49,6 +56,9 @@
         goadd03:()=>{
           location.href='/addhouse21'
         },
+      },
+      mounted:{
+
       }
     }
 </script>
