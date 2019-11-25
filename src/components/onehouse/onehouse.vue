@@ -224,7 +224,7 @@
         <div id="comment">
           <div style="text-align: left;margin-top: 70px;font-size: 25px;font-weight: bold">评价</div>
         </div>
-        <div style="text-align: left;margin-top: 30px" v-for="c in housecomments">
+        <div style="text-align: left;margin-top: 30px" v-for="(c,index) in housecomments" v-if="index<3">
           <hr>
           <div style="float: left; margin-right: 20px"><img :src="c.headimg" style="height: 50px;width: 50px;border-radius:50px"></div>
           <div>
