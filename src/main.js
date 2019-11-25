@@ -38,6 +38,7 @@ import Home from './components/home/homepage'
 import OneHouse from './components/onehouse/onehouse'
 import HouseComment from './components/comment/housecomment'
 import Login from './components/login/loginview'
+import MyInfo from './components/login/myInfo'
 import Registry from './components/login/registryview'
 import AddHouse from './components/addhouse/addhouse'
 import AddHouse01 from './components/addhouse/addhouse01'
@@ -65,6 +66,7 @@ const router=new Router({
     {path:"/addhouse12",component:AddHouse12},
     {path:"/addhouse21",component:AddHouse21},
     {path:"/addhouse00",component:AddHouse00},
+    {path:"/myInfo",component:MyInfo},
     {path:"/reserve",component:Reserve},
   ],
   mode:"history"
