@@ -76,16 +76,16 @@
         <top></top>
 
         <div class="row" style="height: 440px">
-          <div class="col col-6 border border-1 div1" ><img :src="houseimgs[0].img" style="width: 100%;height: 100%;"></div>
+          <div class="col col-6 border border-1 div1" ><img :src="houseimg1.img" style="width: 100%;height: 100%;"></div>
 
           <div class="col col-6 border border-1">
             <div class="row">
-              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimgs[1].img" height="100%" width="100%"></div>
-              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimgs[2].img" height="100%" width="100%"></div>
+              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimg2.img" height="100%" width="100%"></div>
+              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimg3.img" height="100%" width="100%"></div>
             </div>
             <div class="row">
-              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimgs[3].img" height="100%" width="100%"></div>
-              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimgs[4].img" height="100%" width="100%"></div>
+              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimg4.img" height="100%" width="100%"></div>
+              <div class="col col-6 border border-1 div1" style="height: 220px"><img :src="houseimg5.img" height="100%" width="100%"></div>
             </div>
           </div>
 
@@ -254,10 +254,8 @@
             <div style="text-align: left;margin-top: 70px;font-size: 25px;font-weight: bold">位置</div>
             <div class="border border-1" style="text-align: left;margin-top: 40px;height: 400px">
               <!--百度地图-->
-              <div style="width: 100%;height: 100%;margin-top: 280px">
-
+              <div style="width: 100%;height: 100%;">
                 <div id="allmap" ref="allmap" :style="mapStyle"></div>
-
               </div>
             </div>
           </div>
@@ -344,6 +342,7 @@
 
 <script>
   import Top from '../navbars/topnavbar'
+
     export default {
       name:'App',
       components:{Top},
@@ -351,13 +350,16 @@
         return{
           hid:{}, //房屋hid
           housedetail:{},//房屋详情
-          location1:'东方明珠',
           mapStyle:{
             width:'100%',
             height: '500px'
           },
           tenant:[],  //住的人数数组
-          houseimgs:[],    //房屋图片
+          houseimg1:{},    //房屋图片
+          houseimg2:{},
+          houseimg3:{},
+          houseimg4:{},
+          houseimg5:{},
           housecomments:[], //房屋评价
           housebed:[],
           housecommentcount:{},
@@ -382,12 +384,9 @@
         this.drawmap();
         //this.getStartAndEndDate();
       },
-      beforeUpdate() {
-
-      },
       methods:{
-        getdatevalue(){
-          alert(this.value1[1]-this.value1[0])
+        getdatevalue(){    //点击预定
+          alert((value1[1]-value1[0])*(housedetail.price)/86400000);
         },
         gethid(){
           this.hid=this.$route.query.hid;
@@ -411,7 +410,11 @@
             url:'http://127.0.0.1:10010/api/item/house/houseimg/'+this.hid
           }).then(resp=>{
             //console.log(resp);
-            this.houseimgs=resp.data;
+            this.houseimg1=resp.data[0];
+            this.houseimg2=resp.data[1];
+            this.houseimg3=resp.data[2];
+            this.houseimg4=resp.data[3];
+            this.houseimg5=resp.data[4];
           })
         },
         getHouseComment(){   //评论
@@ -486,25 +489,32 @@
             }
           }
         },
-        drawmap:function () {
-          // 百度地图API功能
-          console.log(this.$refs.allmap)
-          // let amap = this.$refs.allmap
-          var map = new BMap.Map("allmap");
-          var point = new BMap.Point(116.331398, 39.897445);
-          map.centerAndZoom(point, 12);
-          var myGeo = new BMap.Geocoder();
-          map.enableScrollWheelZoom();
-          // 将地址解析结果显示在地图上,并调整地图视野
-          myGeo.getPoint(this.location1, function(point){
-            if (point) {
-              map.centerAndZoom(point, 16);
-              map.addOverlay(new BMap.Marker(point));
-            }else{
-              alert("您选择地址没有解析到结果!");
-            }
-          }, "北京市");
-        }
+        drawmap: function () {
+          this.$axios({
+            method:'get',
+            url:'http://127.0.0.1:10010/api/item/house/housedetail/'+this.hid
+          }).then(resp=>{
+            // console.log(resp);
+            // 百度地图API功能
+            console.log(this.$refs.allmap)
+            // let amap = this.$refs.allmap
+            var map = new BMap.Map("allmap");
+            var point = new BMap.Point(116.331398, 39.897445);
+            map.centerAndZoom(point, 12);
+            var myGeo = new BMap.Geocoder();
+            map.enableScrollWheelZoom();
+            // 将地址解析结果显示在地图上,并调整地图视野
+            myGeo.getPoint(resp.data.location, function(point){
+              if (point) {
+                map.centerAndZoom(point, 16);
+                map.addOverlay(new BMap.Marker(point));
+              }else{
+                alert("您选择地址没有解析到结果!");
+              }
+            }, "中国");
+          })
+
+        },
       }
     }
 
