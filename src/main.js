@@ -46,6 +46,7 @@ import AddHouse01 from './components/addhouse/addhouse01'
 import AddHouse02 from './components/addhouse/addhouse02'
 import AddHouse03 from './components/addhouse/addhouse03'
 import AddHouse11 from './components/addhouse/addhouse11'
+import Pay from './components/addhouse/pay'
 import AddHouse12 from './components/addhouse/addhouse12'
 import AddHouse21 from './components/addhouse/addhouse21'
 import AddHouse00 from './components/addhouse/addhouse00'
@@ -70,6 +71,8 @@ const router=new Router({
     {path:"/addhouse00",component:AddHouse00},
     {path:"/myInfo",component:MyInfo},
     {path:"/reserve",component:Reserve},
+    {path:"/pay",component:Pay},
+
   ],
   mode:"history"
 })

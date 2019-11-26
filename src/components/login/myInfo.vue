@@ -23,9 +23,7 @@
 
 
 
-        <div class="bb" ><a href="">个人信息</a></div>
-        <div class="bb"><a href="">我的收藏</a></div>
-        <div class="bb"><a href="">我的订单</a></div>
+        <div class="bb" ><a href="/myInfo">个人信息</a></div>
         <div class="bb"><a href="">我的民宿</a></div>
       </div>
       <div class="col-sm-8" style="height: 100%;margin-left: 20px">
