@@ -214,7 +214,7 @@
           data: _this.houseinstallations,
 
         }).then(function (response) {
-          if(response==1){
+          if(response.data==1){
             location.href="/addhouse"
           }else{
             _this.$message("会话超时")
@@ -226,6 +226,18 @@
         //location.href="/addhouse"
       }
     },
+    mounted:function () {
+      const _this=this
+       this.$axios({
+         method:'post',
+         url:'http://127.0.0.1:10010/api/item/house/findhouseinstallationshid',
+       }).then(function (response) {
+         if(response.data!=null){
+           console.log(response.data)
+           _this.houseinstallations.needed=response.data.needed
+         }
+       })
+    }
   }
 </script>
 

@@ -41,7 +41,7 @@
     export default {
       data() {
         return{
-            isDisabled01:true,
+            isDisabled01:false,
             isDisabled02:false,
             isDisabled03:false,
         }
@@ -56,9 +56,32 @@
         goadd03:()=>{
           location.href='/addhouse21'
         },
+        getMes:function(){
+          const _this=this
+          this.$axios({
+            method: 'post',
+            url: 'http://127.0.0.1:10010/api/item/house/getmes02',
+            data: {}
+          }).then(function (response) {
+            console.log(response.data)
+            if(response.data==0){
+              _this.isDisabled01=false
+              _this.isDisabled02=true
+              _this.isDisabled03=true
+            }if(response.data==1){
+              _this.isDisabled01=false
+              _this.isDisabled02=false
+              _this.isDisabled03=true
+            }if(response.data==2){
+              _this.isDisabled01=false
+              _this.isDisabled02=false
+              _this.isDisabled03=false
+            }
+          });
+        },
       },
-      mounted:{
-
+      mounted:function () {
+        this.getMes();
       }
     }
 </script>

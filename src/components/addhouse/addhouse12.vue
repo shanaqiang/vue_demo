@@ -81,6 +81,7 @@
         location.href='/addhouse11'
       },
       next:function () {
+        const _this=this
         if(this.imgs==''){
           this.$message({
             offset:400,
@@ -95,18 +96,17 @@
             method: 'post',
             url: 'http://127.0.0.1:10010/api/item/house/addhouseimg',
             data: {
-              //arr:JSON.stringify(arr),
               arr:arr,
             }
           }).then(function (response) {
-            if(response==0){
-              this.$message({
+            if(response.data==0){
+              _this.$message({
                 offset:400,
                 message:"请求超时"
               });
             }
-            if(response==1){
-              this.$message({
+            if(response.data==1){
+              _this.$message({
                 offset:400,
                 message:"添加成功"
               });

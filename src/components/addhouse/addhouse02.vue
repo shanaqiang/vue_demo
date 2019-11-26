@@ -11,6 +11,7 @@
         <div>
           <div style="font-size: 25px;margin-top: 100px">房源位置</div>
 
+
           <div style="margin-top: 20px">房客只有在确认预订后才会获知确切的房源地址。</div>
           <div>
             <el-cascader
@@ -72,10 +73,14 @@
         CodeToText,
         TextToCode,
         options: regionData,
+
         location1:'',
         city:'',
         address:'',
-        selectedOptions: '',
+
+        selectedOptions:"",
+
+
         mapStyle:{
           width:'100%',
           height: '500px'
@@ -107,11 +112,46 @@
           method: 'post',
           url: 'http://127.0.0.1:10010/api/item/house/addhouselocation',
           data: {
-            location:this.location1,
+            location:this.address,
             city:this.city,
           }
         }).then(function (response) {
-          if(response==1){
+          if(response.data==1){
+            location.href="/addhouse03"
+          }else{
+            this.$message("会话超时")
+            setTimeout(function () {
+              location.href="/addhouse00"
+            },2000)
+          }
+        })
+        this.$axios({
+          method: 'post',
+          url: 'http://127.0.0.1:10010/api/item/house/addhouseaddress',
+          data: {
+            province:CodeToText[this.selectedOptions[0]],
+            city:CodeToText[this.selectedOptions[1]],
+            yard:CodeToText[this.selectedOptions[2]],
+            loc:this.address,
+          }
+        }).then(function (response) {
+          if(response.data==1){
+          }else{
+            this.$message("会话超时")
+            setTimeout(function () {
+              location.href="/addhouse00"
+            },2000)
+          }
+        })
+        this.$axios({
+          method: 'post',
+          url: 'http://127.0.0.1:10010/api/item/house/addhouselocation',
+          data: {
+            location:this.address,
+            city:this.city,
+          }
+        }).then(function (response) {
+          if(response.data==1){
             location.href="/addhouse03"
           }else{
             this.$message("会话超时")
@@ -136,6 +176,21 @@
         this.location1=this.city+this.address;
         this.drawmap();
       },
+      convertTextToCode:function(provinceText, cityText, regionText) {
+        let code = "";
+        if (provinceText && this.TextToCode[provinceText]) {
+          const province = this.TextToCode[provinceText];
+          code += province.code + ", ";
+          if (cityText && province[cityText]) {
+            const city = province[cityText];
+            code += city.code + ", ";
+            if (regionText && city[regionText]) {
+              code += city[regionText].code;
+            }
+          }
+        }
+        return code;
+      },
 
       //百度地图部分
       drawmap: function () {
@@ -159,6 +214,26 @@
       },
     },
     mounted: function(){
+      this.drawmap()
+      const _this=this
+      this.$axios({
+        method:'post',
+        url:'http://127.0.0.1:10010/api/item/house/findhouseaddresshid',
+        data:{},
+      }).then(function (response) {
+        if(response.data!=null){
+          console.log(response)
+          let code=_this.convertTextToCode(response.data.province,response.data.city,response.data.yard)
+          let cod=code.split(",")
+          let arr=new Array()
+          arr.push(cod[0].trim())
+          arr.push(cod[1].trim())
+          arr.push(cod[2].trim())
+          _this.selectedOptions=arr
+          _this.address=response.data.loc
+        }
+      })
+
       this.drawmap()
     }
   }
