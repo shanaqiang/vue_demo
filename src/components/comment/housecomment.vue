@@ -107,12 +107,13 @@
     },
     methods:{
       gethid(){
+        alert(this.$route.query.hid);
         this.hid=this.$route.query.hid;
       },
       getHouseData(){   //房屋详细
         this.$axios({
           method:'get',
-          url:'http://127.0.0.1:10010/api/item/house/housedetail/1'
+          url:'http://127.0.0.1:10010/api/item/house/housedetail/'+this.hid
         }).then(resp=>{
           console.log(resp);
           this.housedetail=resp.data;
@@ -124,7 +125,7 @@
       getHouseComment(){   //评论
         this.$axios({
           method:'get',
-          url:'http://127.0.0.1:10010/api/item/house/housecomment/1'
+          url:'http://127.0.0.1:10010/api/item/house/housecomment/'+this.hid
         }).then(resp=>{
           //console.log(resp);
           this.housecomments=resp.data.slice(this.page,this.number);
@@ -136,7 +137,7 @@
         this.number=this.number+this.number;
         this.$axios({
           method:'get',
-          url:'http://127.0.0.1:10010/api/item/house/housecomment/1'
+          url:'http://127.0.0.1:10010/api/item/house/housecomment/'+this.hid
         }).then(resp=>{
           //console.log(resp);
           let commentdata=resp.data.slice(this.page,this.number);
@@ -148,7 +149,7 @@
       getHouseCommentCount(){  //评论数
         this.$axios({
           method:'get',
-          url:'http://127.0.0.1:10010/api/item/house/housecommentcount/1'
+          url:'http://127.0.0.1:10010/api/item/house/housecommentcount/'+this.hid
         }).then(resp=>{
           //console.log(resp);
           this.housecommentcount=resp.data;
@@ -159,7 +160,7 @@
       getStartAndEndDate(){
         this.$axios({
           method:'get',
-          url:'http://127.0.0.1:10010/api/item/house/startAndEndDate/1'
+          url:'http://127.0.0.1:10010/api/item/house/startAndEndDate/'+this.hid
         }).then(resp=>{
           //console.log(resp);
           this.rangedate=resp.data;
@@ -168,7 +169,7 @@
       getHouseBed(){   //房间床
         this.$axios({
           method:'get',
-          url:'http://127.0.0.1:10010/api/item/house/housebed/1'
+          url:'http://127.0.0.1:10010/api/item/house/housebed/'+this.hid
         }).then(resp=>{
           //console.log(resp);
           this.housebed=resp.data;
@@ -181,17 +182,6 @@
 </script>
 
 <style>
-  .div1{
-    height: 440px;
-    overflow: hidden;
-  }
-  .div1 img{
-    cursor: pointer;
-    transition: all 0.6s;
-    transform: scale(1.2);
-  }
-  .div1 img:hover{
-    transform: scale(1.3);
-  }
+
 
 </style>

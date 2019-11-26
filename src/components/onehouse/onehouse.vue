@@ -127,7 +127,7 @@
             <div class="block"><el-avatar :size="70" :src="circleUrl"></el-avatar></div>
           </div>
           <div style="margin-left: 10px;">
-            <div style="font-size: 20px;">房东：{{housedetail.account}}<a class="ml-2" href="#">联系房东</a></div>
+            <div style="font-size: 20px;">房东：{{housedetail.account}}<a class="ml-2" href="javascript:" @click="contact()">联系房东</a></div>
             <div class="mt-2" style="font-size: 15px;font-weight: bold;float:left">共收到{{housecommentcount}}条评价·已验证</div>
           </div>
         </div>
@@ -239,22 +239,27 @@
         </div>
         <div class="border border-1" style="text-align: left;margin-top: 40px;height: 400px">
           <div class="block">
-            <span class="demonstration">默认</span>
             <el-date-picker
-              v-model="value6"
+              v-model="value1"
               type="daterange"
-              range-separator="至"
+              range-separator=""
               start-placeholder="开始日期"
               end-placeholder="结束日期"
               :picker-options="pickerOptions">
-
             </el-date-picker>
           </div>
         </div>
         <div>
           <div id="location">
             <div style="text-align: left;margin-top: 70px;font-size: 25px;font-weight: bold">位置</div>
-            <div class="border border-1" style="text-align: left;margin-top: 40px;height: 400px">此处是一个地图大插件</div>
+            <div class="border border-1" style="text-align: left;margin-top: 40px;height: 400px">
+              <!--百度地图-->
+              <div style="width: 100%;height: 100%;margin-top: 280px">
+
+                <div id="allmap" ref="allmap" :style="mapStyle"></div>
+
+              </div>
+            </div>
           </div>
         </div>
 
@@ -294,9 +299,18 @@
           </div>
 
           <hr />
-          <div>
+          <div >
             <div style="text-align: left;font-weight: bold">日期</div>
-            <input type="text" class="form-control">
+            <div class="block" style="text-align: left;margin-top: 5px">
+              <el-date-picker
+                v-model="value1"
+                type="daterange"
+                range-separator=""
+                start-placeholder="开始日期"
+                end-placeholder="结束日期"
+                :picker-options="pickerOptions">
+              </el-date-picker>
+            </div>
           </div>
 
           <div class="mt-4">
@@ -310,11 +324,12 @@
 
           <hr />
           <div class="form-inline">
-            <div style="text-align: left;font-weight: bold">总价：</div>
-            <div style="text-align: right;font-weight: bold">￥998</div>
+            <div style="text-align: left;font-weight: bold">总价：￥</div>
+            <div style="text-align: right;font-weight: bold" v-if="this.value1==''">0</div>
+            <div style="text-align: right;font-weight: bold" v-if="this.value1!=''">{{(value1[1]-value1[0])*(housedetail.price)/86400000}}</div>
           </div>
 
-          <button class="btn btn-danger" style="margin-top: 80px;width: 100%;height: 50px">预   定</button>
+          <button class="btn btn-danger" style="margin-top: 80px;width: 100%;height: 50px" @click="getdatevalue()">预   定</button>
 
         </div>
       </div>
@@ -336,6 +351,11 @@
         return{
           hid:{}, //房屋hid
           housedetail:{},//房屋详情
+          location1:'东方明珠',
+          mapStyle:{
+            width:'100%',
+            height: '500px'
+          },
           tenant:[],  //住的人数数组
           houseimgs:[],    //房屋图片
           housecomments:[], //房屋评价
@@ -343,7 +363,7 @@
           housecommentcount:{},
           installist:[],    //房屋设施
           installistlength:{},//房屋设施数量
-          value6:'',        //日期选择
+          value1:'',        //日期选择
           num1:1,
           pickerOptions: {}
         }
@@ -356,21 +376,19 @@
         this.getHouseBed();
         this.getHouseCommentCount();
         this.getHouseInstallations();
+        this.selectdate();
       },
-      mounted(){
+      mounted:function () {
+        this.drawmap();
         //this.getStartAndEndDate();
       },
       beforeUpdate() {
-        // console.log(this.housedetail.startdate);
-        // alert(this.housedetail.enddate);
-        // this.pickerOptions = {
-        //   disabledDate(time) {
-        //     //return time.getTime() < Date.now() - 8.64e7;
-        //    return time.getTime()<new Date(this.housedetail.enddate).getTime();
-        //   }
-        // }
+
       },
       methods:{
+        getdatevalue(){
+          alert(this.value1[1]-this.value1[0])
+        },
         gethid(){
           this.hid=this.$route.query.hid;
         },
@@ -381,6 +399,7 @@
           }).then(resp=>{
              // console.log(resp);
              this.housedetail=resp.data;
+             this.location1=resp.data.location;
              for(var i=1;i<=resp.data.maxtenant;i++){
                this.tenant.push(i);
              }
@@ -436,18 +455,57 @@
             method:'get',
             url:'http://127.0.0.1:10010/api/item/house/houseinstallations/'+this.hid
           }).then(resp=>{
-            console.log(resp);
+            //console.log(resp);
             this.installist=resp.data;
             this.installistlength=resp.data.length;
           })
         },
         selectcomment(){
           this.$router.push({
-            path:'/comment'
+            path:'/comment',
+            query:{
+              hid:this.hid
+            }
           })
+        },
+        contact(){
+          this.$router.push({
+            path:'/message',
+            query:{
+              hid:this.hid
+            }
+          })
+        },
+        selectdate(){
+          // console.log(this.housedetail.startdate);
+          // alert(this.housedetail.enddate);
+          this.pickerOptions = {
+            disabledDate(time) {
+              return time.getTime() < Date.now() - 8.64e7;
+            // return time.getTime()<new Date(this.housedetail.enddate).getTime();
+            }
+          }
+        },
+        drawmap:function () {
+          // 百度地图API功能
+          console.log(this.$refs.allmap)
+          // let amap = this.$refs.allmap
+          var map = new BMap.Map("allmap");
+          var point = new BMap.Point(116.331398, 39.897445);
+          map.centerAndZoom(point, 12);
+          var myGeo = new BMap.Geocoder();
+          map.enableScrollWheelZoom();
+          // 将地址解析结果显示在地图上,并调整地图视野
+          myGeo.getPoint(this.location1, function(point){
+            if (point) {
+              map.centerAndZoom(point, 16);
+              map.addOverlay(new BMap.Marker(point));
+            }else{
+              alert("您选择地址没有解析到结果!");
+            }
+          }, "北京市");
         }
       }
-
     }
 
 </script>
