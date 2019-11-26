@@ -14,6 +14,9 @@
         </li><li class="nav-item active">
         <a class="nav-link" href="/registry">注册</a>
       </li>
+        <li class="nav-item active">
+          <a class="nav-link" href="/myInfo">个人中心</a>
+        </li>
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="搜索" aria-label="Search">

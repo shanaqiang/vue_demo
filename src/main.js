@@ -37,22 +37,27 @@ Vue.use(BaiduMap, {
 import Home from './components/home/homepage'
 import OneHouse from './components/onehouse/onehouse'
 import HouseComment from './components/comment/housecomment'
+import Message from './components/message/message'
 import Login from './components/login/loginview'
+import MyInfo from './components/login/myInfo'
 import Registry from './components/login/registryview'
 import AddHouse from './components/addhouse/addhouse'
 import AddHouse01 from './components/addhouse/addhouse01'
 import AddHouse02 from './components/addhouse/addhouse02'
 import AddHouse03 from './components/addhouse/addhouse03'
 import AddHouse11 from './components/addhouse/addhouse11'
+import Pay from './components/addhouse/pay'
 import AddHouse12 from './components/addhouse/addhouse12'
 import AddHouse21 from './components/addhouse/addhouse21'
 import AddHouse00 from './components/addhouse/addhouse00'
+import Reserve from './components/reserve/reserveview'
 import Test from './components/test'
 const router=new Router({
   routes:[
     {path:"/",component:Home},
     {path:"/one",component:OneHouse},
     {path:"/comment",component:HouseComment},
+    {path:"/message",component:Message},
     {path:"/login",component:Login},
     {path:"/registry",component:Registry},
     {path:"/addhouse01",component:AddHouse01},
@@ -64,6 +69,10 @@ const router=new Router({
     {path:"/addhouse12",component:AddHouse12},
     {path:"/addhouse21",component:AddHouse21},
     {path:"/addhouse00",component:AddHouse00},
+    {path:"/myInfo",component:MyInfo},
+    {path:"/reserve",component:Reserve},
+    {path:"/pay",component:Pay},
+
   ],
   mode:"history"
 })

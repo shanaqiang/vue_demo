@@ -1,0 +1,367 @@
+<template>
+  <div class="container">
+    <div style="color: red;font-size: 20px;margin-top: 20px"><a href="/">返回首页</a></div>
+    <hr style="margin-top:30px">
+    <div class="row" style="margin-top: 20px">
+      <div class="col-sm-2" style="height: 402px;margin-left: 50px;background:yellow">
+        <div style="height:100px;width: 100px;margin-left:25px;margin-top: 10px" id="aa"><img :src='"../../../static/img/2.jpg"' width="100%" height="100%" id="img"></div>
+
+        <el-upload
+          class="upload-demo"
+          action="http://127.0.0.1:10010/api/item/front/uploadImg"
+          :on-preview="handlePreview"
+          :on-success="uploaded"
+          :on-remove="handleRemove"
+          :before-remove="beforeRemove"
+          multiple
+          :limit="1"
+          :on-exceed="handleExceed"
+          :file-list="fileList"
+        >
+          <el-button size="small" type="primary" style="margin-top: 5px;margin-left: 35px">更换头像</el-button>
+        </el-upload>
+
+
+
+        <div class="bb" ><a href="/myInfo">个人信息</a></div>
+        <div class="bb"><a href="">我的民宿</a></div>
+      </div>
+      <div class="col-sm-8" style="height: 100%;margin-left: 20px">
+
+
+        <div id="widget-otherinfo" style="margin-left:20px">
+          <div class="userSetting-setWrap">
+
+
+<!--账号-->
+            <div class="userSetting-setWrap-item even" data-otherinfo-line="blood">
+              <span class="vl-inline item-title"><label>账号：</label></span>
+              <span data-line-elem="editline" style="display:none;">
+              <span class="checkBox_wrap checkBox_wrap-normal clearfix" data-line-elem="bloodtype">
+                  <span data-pcselect-elem="handler">
+                      <span class="checkBox checkBox_wrap-default" data-line-elem="value">请选择</span>
+                      <span class="checkBoxBtn"></span>
+                  </span>
+                  <ul class="checkBoxList" style="display:none;" data-pcselect-elem="optionList"></ul>
+              </span>
+              <span class="item-opt">
+                <a href="javascript:;" data-line-elem="cancel">取消</a>
+                 <span class="ml10">保存</span>
+              </span>
+            </span>
+              <span data-line-elem="displayline">
+              <span class="vl-inline">
+                <em class="c666" data-line-elem="display">{{userd.user.account}}</em>
+              </span>
+            </span>
+            </div>
+
+
+<!--性别-->
+            <div class="userSetting-setWrap-item odd" data-otherinfo-line="gender">
+              <span class="vl-inline item-title"><label>性别：</label></span>
+              <span data-line-elem="editline" style="display:none;">
+              <span class="vl-inline">
+                  <label id="maile" class="radio-item  mr10 radio-selected" data-line-elem="genderin" data-pcradio-selectedclass="radio-selected" data-pcradio-name="gender" data-pcradio-value="1">
+                      <i class="site-icons icon-radio"></i>
+                      <span class="title">男</span>
+                  </label>
+                  <label d="fmaile" class="radio-item " data-line-elem="genderin" data-pcradio-selectedclass="radio-selected" data-pcradio-name="gender" data-pcradio-value="0">
+                      <i class="site-icons icon-radio"></i>
+                      <span class="title">女</span>
+                  </label>
+              </span>
+              <span class="item-opt">
+                <a href="javascript:;" data-line-elem="cancel">取消</a>
+                 <span class="ml10" @click="sex()" data-line-elem="cancel">保存</span>
+              </span>
+            </span>
+              <span data-line-elem="displayline">
+              <span class="vl-inline">
+                <em v-if="userd.user.sex==''" class="c666" data-line-elem="display">男</em>
+                 <em v-else-if="userd.user.sex='女'" class="c666" data-line-elem="display">女</em>
+                <em v-else-if="userd.user.sex='男'" class="c666" data-line-elem="display">男</em>
+              </span>
+              <span class="item-opt"><a href="javascript:;" data-line-elem="edit">修改</a></span>
+            </span>
+            </div>
+
+<!--年龄-->
+
+            <div class="userSetting-setWrap-item even" data-otherinfo-line="blood">
+              <span class="vl-inline item-title"><label>年龄：</label></span>
+              <span data-line-elem="editline" style="display:none;">
+              <span class="checkBox_wrap checkBox_wrap-normal clearfix" data-line-elem="bloodtype">
+                  <span data-pcselect-elem="handler">
+                      <span class="checkBox checkBox_wrap-default" data-line-elem="value">请选择</span>
+                      <span class="checkBoxBtn"></span>
+                  </span>
+                  <ul class="checkBoxList" style="display:none;" data-pcselect-elem="optionList"></ul>
+              </span>
+              <span class="item-opt">
+                <a href="javascript:;" data-line-elem="cancel">取消</a>
+                 <span class="ml10">保存</span>
+              </span>
+            </span>
+              <span data-line-elem="displayline">
+              <span class="vl-inline">
+                <input class="c666" data-line-elem="display" v-model="userd.user.age" style="border:0px">
+              </span>
+            </span>
+            </div>
+
+<!--生日-->
+            <div class="userSetting-setWrap-item odd" data-otherinfo-line="birthday">
+              <span class="vl-inline item-title"><label>生日：</label></span>
+              <span data-line-elem="editline" style="display:none;">
+              <span class="checkBox_wrap checkBox_wrap-min clearfix" data-line-elem="yearin" id="year">
+                  <span data-pcselect-elem="handler">
+                      <span class="checkBox checkBox_wrap-default" data-line-elem="value">请选择</span>
+                      <span class="checkBoxBtn"></span>
+                  </span>
+                  <ul class="checkBoxList" style="display:none;" data-pcselect-elem="optionList"></ul>
+              </span>
+              <span class="mainColor mr5">&nbsp;年</span>
+              <span class="checkBox_wrap checkBox_wrap-min clearfix" data-line-elem="monthin" id="month">
+                  <span data-pcselect-elem="handler">
+                      <span class="checkBox checkBox_wrap-default" data-line-elem="value">请选择</span>
+                      <span class="checkBoxBtn"></span>
+                  </span>
+                  <ul class="checkBoxList" style="display:none;" data-pcselect-elem="optionList"></ul>
+              </span>
+              <span class="mainColor mr5">&nbsp;月</span>
+              <span class="checkBox_wrap checkBox_wrap-min clearfix" data-line-elem="dayin" id="day">
+                  <span data-pcselect-elem="handler">
+                      <span class="checkBox checkBox_wrap-default" data-line-elem="value">请选择</span>
+                      <span class="checkBoxBtn"></span>
+                  </span>
+                  <ul class="checkBoxList" style="display:none;" data-pcselect-elem="optionList"></ul>
+              </span>
+              <span class="mainColor mr5">&nbsp;日</span>
+              <span class="item-opt">
+                <a href="javascript:;" data-line-elem="cancel">取消</a>
+                 <span class="ml10" data-line-elem="cancel" @click="birtha()">保存</span>
+              </span>
+            </span>
+              <span data-line-elem="displayline">
+              <span class="vl-inline">
+                <input class="c666" data-line-elem="display" v-model="userd.birth" style="border:0px"  placeholder="出生日期">
+              </span>
+              <span class="item-opt"><a href="javascript:;" data-line-elem="edit">设置</a></span>
+            </span>
+            </div>
+
+
+<!-- 邮箱账号           -->
+            <div class="userSetting-setWrap-item even" data-otherinfo-line="location">
+              <span class="vl-inline item-title"><label>邮箱账号：</label></span>
+              <span data-line-elem="editline" style="display:none;">
+              <span class="vl-inline item-input"><input class="input-common" type="text" placeholder="加个好友吧" data-line-elem="qqin" ></span>
+              <span class="item-opt">
+                <a href="javascript:;" data-line-elem="cancel">取消</a>
+                <span class="ml10" data-line-elem="cancel" @click="changeEmail()">保存</span>
+              </span>
+            </span>
+              <span data-line-elem="displayline">
+              <span class="vl-inline">
+                <input class="c666" data-line-elem="display" v-model="userd.user.email" style="border:0px" placeholder="还没设置邮箱">
+              </span>
+              <span class="item-opt"><a href="javascript:;" data-line-elem="edit">设置</a></span>
+            </span>
+            </div>
+
+
+<!-- 联系方式           -->
+            <div class="userSetting-setWrap-item odd" data-otherinfo-line="qq">
+              <span class="vl-inline item-title"><label>联系方式：</label></span>
+              <span data-line-elem="editline" style="display:none;">
+              <span class="vl-inline item-input"><input class="input-common" type="text" placeholder="给个联系方式吧" data-line-elem="qqin" ></span>
+              <span class="item-opt">
+                <a href="javascript:;" data-line-elem="cancel">取消</a>
+                <span class="ml10"  data-line-elem="cancel" @click="changePhone()">保存</span>
+              </span>
+            </span>
+              <span data-line-elem="displayline">
+              <span class="vl-inline">
+                <input class="c666" data-line-elem="display" v-model="userd.user.mobilephone" style="border:0px" placeholder="还没设置联系方式">
+              </span>
+              <span class="item-opt"><a href="javascript:;" data-line-elem="edit">设置</a></span>
+            </span>
+            </div>
+
+<!-- 账号状态           -->
+            <div class="userSetting-setWrap-item even" data-otherinfo-line="blood">
+              <span class="vl-inline item-title"><label>账号状态：</label></span>
+              <span data-line-elem="editline" style="display:none;">
+              <span class="checkBox_wrap checkBox_wrap-normal clearfix" data-line-elem="bloodtype">
+                  <span data-pcselect-elem="handler">
+                      <span class="checkBox checkBox_wrap-default" data-line-elem="value">请选择</span>
+                      <span class="checkBoxBtn"></span>
+                  </span>
+                  <ul class="checkBoxList" style="display:none;" data-pcselect-elem="optionList"></ul>
+              </span>
+              <span class="item-opt">
+                <a href="javascript:;" data-line-elem="cancel">取消</a>
+                 <span class="ml10">保存</span>
+              </span>
+            </span>
+              <span data-line-elem="displayline">
+              <span class="vl-inline">
+                <em v-if="userd.user.status==1" class="c666" data-line-elem="display">老板</em>
+                <em else-if class="c666" data-line-elem="display">封号中...</em>
+              </span>
+            </span>
+            </div>
+
+
+          </div>
+        </div>
+        <div  class="userSetting-pop" style="display:none;">
+          <div id="widget-schoolselector" class="userSetting-pop_inner" style="width:545px;">
+          </div>
+        </div>
+
+        <div class="upLoad_userHeadWrap" style="margin: 100px auto; display:none;" id="changeIconBox">
+
+          <div class="upLoad_userHead-con" id="widget-avatarform">
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+    export default {
+
+       data(){
+            return {
+                fileList:"",
+                userd:{
+                    user:{
+                        uid: "",
+                        account: "",
+                        password: "",
+                        sex: "",
+                        birthday: "",
+                        age: "",
+                        email: "",
+                        mobilephone: "",
+                        selfintroduction: "",
+                        headimg: "",
+                        createDate: "",
+                        status: ""
+                    },
+                    birth:""
+                }
+
+            }
+       },
+        created:function(){
+            const _this=this
+            Q.projectName = 'qiyiV2';
+            Q.load("ugcBasicInfo");
+            this.$axios({
+                method: 'post',
+                url: 'http://127.0.0.1:10010/api/item/front/myInfo',
+                data: {
+                }
+            }).then(function (response) {
+              _this.user.password=response.data.password
+              _this.user.mobilephone=response.data.mobilephone
+              _this.user.account=response.data.account
+              _this.user.sex=response.data.sex
+              _this.user.email=response.data.email
+              _this.user.age=response.data.age
+              _this.user.headimg=response.data.headimg
+              _this.user.status=response.data.status
+            })
+        },
+        methods: {
+            sex: function () {
+                const _this = this
+                if (this.userd.user.sex == "男" && this.userd.user.user.sex == "") {
+                    _this.userd.user.sex = "女"
+                } else {
+                    _this.userd.user.sex = "男"
+                }
+                this.$axios({
+                    method: 'post',
+                    url: 'http://127.0.0.1:10010/api/item/front/changeSex',
+                    data: {
+                        sex: this.userd.user.sex
+                    }
+                }).then(function (response) {
+
+                })
+
+
+            },
+            birtha: function () {
+                const _this = this
+                var birth = $("#year").text().substring(0, 4) + "-" + $("#month").text().substring(0, 2).trim() + "-" + $("#day").text().substring(0, 2).trim()
+                this.$axios({
+                    method: 'post',
+                    url: 'http://127.0.0.1:10010/api/item/front/birth',
+                    data: {
+                        birth: birth
+                    }
+                }).then(function (response) {
+                    _this.userd.birth = birth
+                    _this.userd.user.age = response.data
+
+                })
+            },
+            changeEmail: function () {
+                this.$axios({
+                    method: 'post',
+                    url: 'http://127.0.0.1:10010/api/item/front/changeEmail',
+                    data: {
+                        email: this.userd.user.email
+                    }
+                }).then(function (response) {
+                    _this.$message("修改成功")
+                })
+
+            },
+
+            changePhone: function () {
+                this.$axios({
+                    method: 'post',
+                    url: 'http://127.0.0.1:10010/api/item/front/changeEmail',
+                    data: {
+                        mobilephone: this.userd.user.mobilephone
+                    }
+                }).then(function (response) {
+                    _this.$message("修改成功")
+                })
+            },
+            uploaded(response, file, fileList){
+                $('#img').attr("src", response);
+            },
+
+        }
+    }
+</script>
+<style>
+  @import "../../../static/css/personalCenter-new.css";
+  @import "../../../static/css/v3-basic_other.css";
+  .bb{
+    height: 50px;
+    width:120%;
+    text-align: center;
+    line-height: 50px;
+    background: orange;
+    margin-top:5px;
+    margin-left: -16px;
+    font-size: 17px;
+  }
+  .bb:hover{
+    background: gold;
+    border-left:red 2px solid;
+  }
+  .bb a:hover{
+    text-decoration:none
+  }
+</style>

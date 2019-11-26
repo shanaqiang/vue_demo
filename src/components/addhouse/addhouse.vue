@@ -26,8 +26,6 @@
       </div>
 
 
-
-
       <div class="col col-4">
         <div style="height: 500px">
           <img src="../../../static/img/pages/photos.6f837cb4.png">
