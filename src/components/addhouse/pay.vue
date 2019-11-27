@@ -7,6 +7,7 @@
         <div style="margin-top:20px;font-weight:bold;font-size: 30px;margin-left: 60px">确认并支付</div>
         <div style="margin-top:20px;font-weight:bold;font-size: 20px;margin-left: 60px">选择支付方式</div>
         <div class="row" style="margin-top:20px">
+
           <div class="col-sm-1" style="margin-left: 60px" >
             <div  @click="zfb()"style="border-radius: 5px;width:100px;height: 50px;border:1px grey solid"><img src="../../../static/img/zfb.jpg" width="100%" height="100%"></div>
           </div>
@@ -18,14 +19,27 @@
           <div style="color:red;font-size: 25px" id="mm"></div>
           <div style="color:red;font-size: 25px">￥:{{orderSearch.orders.totalprice}}</div>
           <button style="border-radius: 5px;width:100px;height: 50px;border:0px;background:green;color: white;margin-top: 10px" @click="pay()">确认支付</button>
-          <div id="nn"  style="font-size: 30px;height: 100px;width: 600px;border:red 1px solid">
-           {{datea}}
-          </div>
         </div>
       </div>
+
+
       <div class="col-sm-4">
-        <div style="border:red 1px solid;height: 400px;height:500px">
-<!--          <div style="width:100%;height:300px"><img :src=orderSearch.house.img width="100%" height="10%"></div>-->
+        <div style="width: 400px;height:450px;border:red 1px solid">
+          <div class="row">
+            <div class="col-sm-7" style="height:200px;border: red 1px solid">
+              <div style="font-size: 15px;padding:3px;border:aqua 1px solid;font-size: 15px;font-weight: bold" class="divcss5" >AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA</div>
+              <div style="font-size: 15px;padding:3px;border:aqua 1px solid;font-size: 15px;font-weight: bold">aaaaaaa</div>
+              <div style="font-size: 15px;padding:3px;border:aqua 1px solid;font-size: 15px;font-weight: bold">aaaaaaa</div>
+            </div>
+            <div class="col-sm-5" style="height:200px"><div style="height: 140px;width: 100%;margin-top:40px"><img :src=orderSearch.house.img  width="100%" height="100%"></div></div>
+          </div>
+            <div style="height: 100px">
+              <div style="height: 50px;line-height: 50px;font-size: 20px;padding: 15px">人数:{{orderSearch.orders. peoplenum}}</div>
+              <div style="height: 50px;line-height: 50px;font-size: 20px;padding: 15px">aaaaaa</div>
+              <div style="height: 50px;line-height: 50px;font-size: 20px;padding: 15px;text-align: right">单价:￥{{orderSearch.orders.price}}</div>
+              <div style="height: 50px;line-height: 50px;font-size: 20px;padding: 15px;text-align: right">总价:￥{{orderSearch.orders.totalprice}}</div>
+            </div>
+
 
         </div>
       </div>
@@ -117,10 +131,10 @@
                 _this.orderSearch.orders.uid=response.data.orders.uid
                 _this.orderSearch.orders.price=response.data.orders.price
                 _this.orderSearch.orders.createDate=response.data.orders.createDate
-                _this.orderSearch.orders.startDate=formatDate(response.data.orders.startDate,"yyyy--MM-hh")
-
-
-
+                _this.orderSearch.orders.startDate=response.data.orders.startDate.split(" ")[0]
+                _this.orderSearch.orders.endDate=response.data.orders.endDate.split(" ")[0]
+                _this.orderSearch.orders.totalprice=response.data.orders.totalprice
+                _this.orderSearch.orders.peoplenum=response.data.orders.peoplenum
                 _this.orderSearch.house.location=response.data.house.location
                 _this.orderSearch.house.city=response.data.house.city
                 _this.orderSearch.house.housingtype=response.data.house.housingtype
@@ -162,14 +176,7 @@
                 }
 
             },
-            aaa:function(){
-                const _this=this
-                alert("asdasdasd")
-                var date=new Date();
-                alert(date)
-               _this.datea=date
 
-            }
         }
 
 
@@ -177,5 +184,7 @@
 </script>
 
 <style>
+  .divcss5{ border:1px solid #00F; height:90px; width:230px;word-wrap:break-word;margin-top:30px }
+
 
 </style>
