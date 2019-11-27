@@ -96,27 +96,27 @@
               <li><a href="#">关于</a></li>
               <li><a href="#">支持</a></li>
               <li><a href="#">项目</a></li>
-              <li><a href="#">Policy</a></li>
+              <li><a href="#">政策</a></li>
               <li><a href="#">联系</a></li>
             </ul>
           </li>
 
           <li class="links">
             <ul>
-              <li><a href="#">Appartements</a></li>
-              <li><a href="#">Houses</a></li>
-              <li><a href="#">Villas</a></li>
-              <li><a href="#">Mansions</a></li>
+              <li><a href="#">伙伴</a></li>
+              <li><a href="#">房屋</a></li>
+              <li><a href="#">差旅</a></li>
+              <li><a href="#">杂志</a></li>
               <li><a href="#">...</a></li>
             </ul>
           </li>
 
           <li class="links">
             <ul>
-              <li><a href="#">New York</a></li>
-              <li><a href="#">Los Anglos</a></li>
-              <li><a href="#">Miami</a></li>
-              <li><a href="#">Washington</a></li>
+              <li><a href="#">上海</a></li>
+              <li><a href="#">北京</a></li>
+              <li><a href="#">广州</a></li>
+              <li><a href="#">深圳</a></li>
               <li><a href="#">...</a></li>
             </ul>
           </li>
