@@ -74,6 +74,8 @@ const router=new Router({
     {path:"/reserve",component:Reserve},
     {path:"/pay",component:Pay},
 
+    {path:"/pay",component:Pay},
+
     {path:"/testvue",component:TestVue},
   ],
   mode:"history"
