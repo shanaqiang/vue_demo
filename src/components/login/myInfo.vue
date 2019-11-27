@@ -4,7 +4,7 @@
     <hr style="margin-top:30px">
     <div class="row" style="margin-top: 20px">
       <div class="col-sm-2" style="height: 402px;margin-left: 50px;background:yellow">
-        <div style="height:100px;width: 100px;margin-left:25px;margin-top: 10px" id="aa"><img :src='"../../../static/img/2.jpg"' width="100%" height="100%" id="img"></div>
+        <div style="height:100px;width: 100px;margin-left:25px;margin-top: 10px" id="aa"><img :src="this.user.headimg" width="100%" height="100%" id="img"></div>
 
         <el-upload
           class="upload-demo"
@@ -18,14 +18,12 @@
           :on-exceed="handleExceed"
           :file-list="fileList"
         >
-          <el-button size="small" type="primary" style="margin-top: 5px;margin-left: 35px">更换头像</el-button>
+          <el-button size="small" type="primary" style="margin-top: 5px;margin-left: -10px;margin-left: 35px">更换头像</el-button>
         </el-upload>
 
 
 
-        <div class="bb" ><a href="">个人信息</a></div>
-        <div class="bb"><a href="">我的收藏</a></div>
-        <div class="bb"><a href="">我的订单</a></div>
+        <div class="bb" ><a href="/myInfo">个人信息</a></div>
         <div class="bb"><a href="">我的民宿</a></div>
       </div>
       <div class="col-sm-8" style="height: 100%;margin-left: 20px">
@@ -53,7 +51,7 @@
             </span>
               <span data-line-elem="displayline">
               <span class="vl-inline">
-                <em class="c666" data-line-elem="display">{{userd.user.account}}</em>
+                <em class="c666" data-line-elem="display" id="account " v-model="user.account" style="text-align: left">{{user.account}}</em>
               </span>
             </span>
             </div>
@@ -80,9 +78,7 @@
             </span>
               <span data-line-elem="displayline">
               <span class="vl-inline">
-                <em v-if="userd.user.sex==''" class="c666" data-line-elem="display">男</em>
-                 <em v-else-if="userd.user.sex='女'" class="c666" data-line-elem="display">女</em>
-                <em v-else-if="userd.user.sex='男'" class="c666" data-line-elem="display">男</em>
+                <em  class="c666" data-line-elem="display" id="sex"></em>
               </span>
               <span class="item-opt"><a href="javascript:;" data-line-elem="edit">修改</a></span>
             </span>
@@ -107,7 +103,7 @@
             </span>
               <span data-line-elem="displayline">
               <span class="vl-inline">
-                <input class="c666" data-line-elem="display" v-model="userd.user.age" style="border:0px">
+                <input class="c666" data-line-elem="display" v-model="user.age" style="border:0px" id="age">
               </span>
             </span>
             </div>
@@ -147,7 +143,7 @@
             </span>
               <span data-line-elem="displayline">
               <span class="vl-inline">
-                <input class="c666" data-line-elem="display" v-model="userd.birth" style="border:0px"  placeholder="出生日期">
+                <input class="c666" data-line-elem="display" v-model="user.birthday" style="border:0px"  placeholder="出生日期" id="birthday">
               </span>
               <span class="item-opt"><a href="javascript:;" data-line-elem="edit">设置</a></span>
             </span>
@@ -158,7 +154,7 @@
             <div class="userSetting-setWrap-item even" data-otherinfo-line="location">
               <span class="vl-inline item-title"><label>邮箱账号：</label></span>
               <span data-line-elem="editline" style="display:none;">
-              <span class="vl-inline item-input"><input class="input-common" type="text" placeholder="加个好友吧" data-line-elem="qqin" ></span>
+              <span class="vl-inline item-input"><input class="input-common" type="text" placeholder="加个好友吧" data-line-elem="qqin"  id="ema"></span>
               <span class="item-opt">
                 <a href="javascript:;" data-line-elem="cancel">取消</a>
                 <span class="ml10" data-line-elem="cancel" @click="changeEmail()">保存</span>
@@ -166,7 +162,7 @@
             </span>
               <span data-line-elem="displayline">
               <span class="vl-inline">
-                <input class="c666" data-line-elem="display" v-model="userd.user.email" style="border:0px" placeholder="还没设置邮箱">
+                <input class="c666" data-line-elem="display" v-model="user.email" style="border:0px" placeholder="还没设置邮箱" id="email">
               </span>
               <span class="item-opt"><a href="javascript:;" data-line-elem="edit">设置</a></span>
             </span>
@@ -177,7 +173,7 @@
             <div class="userSetting-setWrap-item odd" data-otherinfo-line="qq">
               <span class="vl-inline item-title"><label>联系方式：</label></span>
               <span data-line-elem="editline" style="display:none;">
-              <span class="vl-inline item-input"><input class="input-common" type="text" placeholder="给个联系方式吧" data-line-elem="qqin" ></span>
+              <span class="vl-inline item-input"><input class="input-common" type="text" placeholder="给个联系方式吧" data-line-elem="qqin" id="pho"></span>
               <span class="item-opt">
                 <a href="javascript:;" data-line-elem="cancel">取消</a>
                 <span class="ml10"  data-line-elem="cancel" @click="changePhone()">保存</span>
@@ -185,7 +181,7 @@
             </span>
               <span data-line-elem="displayline">
               <span class="vl-inline">
-                <input class="c666" data-line-elem="display" v-model="userd.user.mobilephone" style="border:0px" placeholder="还没设置联系方式">
+                <input class="c666" data-line-elem="display" v-model="user.mobilephone" style="border:0px" placeholder="还没设置联系方式" id="mobilephone">
               </span>
               <span class="item-opt"><a href="javascript:;" data-line-elem="edit">设置</a></span>
             </span>
@@ -209,8 +205,7 @@
             </span>
               <span data-line-elem="displayline">
               <span class="vl-inline">
-                <em v-if="userd.user.status==1" class="c666" data-line-elem="display">老板</em>
-                <em else-if class="c666" data-line-elem="display">封号中...</em>
+                <em  class="c666" data-line-elem="display" id="status"></em>
               </span>
             </span>
             </div>
@@ -236,63 +231,85 @@
 
 <script>
     export default {
-
        data(){
             return {
-                fileList:"",
-                userd:{
-                    user:{
-                        uid: "",
-                        account: "",
-                        password: "",
-                        sex: "",
-                        birthday: "",
-                        age: "",
-                        email: "",
-                        mobilephone: "",
-                        selfintroduction: "",
-                        headimg: "",
-                        createDate: "",
-                        status: ""
-                    },
-                    birth:""
-                }
-
+                fileList: "",
+                user:{
+                    uid: "",
+                    account: "",
+                    password: "",
+                    sex: "",
+                    birthday: "",
+                    age: "",
+                    email: "",
+                    mobilephone: "",
+                    selfintroduction: "",
+                    headimg: "",
+                    createDate: "",
+                    status: ""
+                },
             }
        },
         created:function(){
-            const _this=this
             Q.projectName = 'qiyiV2';
             Q.load("ugcBasicInfo");
-            this.$axios({
-                method: 'post',
-                url: 'http://127.0.0.1:10010/api/item/front/myInfo',
-                data: {
-                }
-            }).then(function (response) {
-              _this.user.password=response.data.password
-              _this.user.mobilephone=response.data.mobilephone
-              _this.user.account=response.data.account
-              _this.user.sex=response.data.sex
-              _this.user.email=response.data.email
-              _this.user.age=response.data.age
-              _this.user.headimg=response.data.headimg
-              _this.user.status=response.data.status
-            })
+
         },
+        mounted:function(){
+            this.userlist()
+
+        },
+
         methods: {
+            userlist:function(){
+                const _this=this
+                this.$axios({
+                    method: 'post',
+                    url: 'http://127.0.0.1:10010/api/item/front/myInfo',
+                    data: {
+                    }
+                }).then(function (response) {
+                    _this.user.password=response.data.password
+                    _this.user.mobilephone=response.data.mobilephone
+                    _this.user.account=response.data.account
+                    _this.user.sex=response.data.sex
+                    _this.user.email=response.data.email
+                    _this.user.age=response.data.age
+                    _this.user.headimg=response.data.headimg
+                    _this.user.status=response.data.status
+                    _this.user.birthday=response.data.birthday.split(" ")[0]
+                    if(response.data.account==null){
+                        $("#sex").text("男");
+                    }else{
+                        $("#sex").text(response.data.sex);
+                    }
+                    $("#email").text(response.data.email);
+                    $("#mobilephone").text(response.data.mobilephone);
+                    $("#age").text(response.data.age);
+                    $("#birthday").text(response.data.birthday);
+                    if(response.data.status==0){
+                        $("#status").text("封号中....");
+                    }else{
+                        $("#status").text("正常");
+                    }
+
+                })
+
+            },
             sex: function () {
                 const _this = this
-                if (this.userd.user.sex == "男" && this.userd.user.user.sex == "") {
-                    _this.userd.user.sex = "女"
+                if (this.user.sex == "男" || this.user.sex == null) {
+                    _this.user.sex = "女"
+                    $('#sex').text("女")
                 } else {
-                    _this.userd.user.sex = "男"
+                    _this.user.sex = "男"
+                    $('#sex').text("男")
                 }
                 this.$axios({
                     method: 'post',
                     url: 'http://127.0.0.1:10010/api/item/front/changeSex',
                     data: {
-                        sex: this.userd.user.sex
+                        sex: this.user.sex
                     }
                 }).then(function (response) {
 
@@ -310,32 +327,37 @@
                         birth: birth
                     }
                 }).then(function (response) {
-                    _this.userd.birth = birth
-                    _this.userd.user.age = response.data
+                    _this.user.birthday = birth
+                    _this.user.age = response.data
 
                 })
             },
             changeEmail: function () {
+                var ema=$("#ema").val()
+                alert(ema)
                 this.$axios({
                     method: 'post',
                     url: 'http://127.0.0.1:10010/api/item/front/changeEmail',
                     data: {
-                        email: this.userd.user.email
+                        email: ema
                     }
                 }).then(function (response) {
+                    $("#email").val(ema)
                     _this.$message("修改成功")
                 })
 
             },
 
             changePhone: function () {
+                var ema=$("#pho").val()
                 this.$axios({
                     method: 'post',
-                    url: 'http://127.0.0.1:10010/api/item/front/changeEmail',
+                    url: 'http://127.0.0.1:10010/api/item/front/changePhone',
                     data: {
-                        mobilephone: this.userd.user.mobilephone
+                        mobilephone: ema
                     }
                 }).then(function (response) {
+                    $("#mobilephone").val(ema)
                     _this.$message("修改成功")
                 })
             },

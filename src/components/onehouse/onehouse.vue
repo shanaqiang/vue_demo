@@ -493,7 +493,7 @@
             this.pickerOptions = {
               disabledDate(time) {
                 for(var i=1;i<resp.data.length;i++){
-                  if(time.getTime()>new Date(resp.data[0].enddate)||
+                  if(time.getTime() < Date.now() - 8.64e7||time.getTime()>new Date(resp.data[0].enddate)||
                     time.getTime()<new Date(resp.data[0].startdate)||
                     (time.getTime()>new Date(resp.data[i].startdate)- 8.64e7&&
                       time.getTime()<new Date(resp.data[i].enddate))){

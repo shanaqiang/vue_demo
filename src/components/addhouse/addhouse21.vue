@@ -24,7 +24,7 @@
               end-placeholder="结束日期">
             </el-date-picker>
           </div>
-          <div style="margin-top: 50px">{{date}}</div>
+          <div style="margin-top: 50px"></div>
 
         </div>
         <hr />
@@ -123,7 +123,7 @@
     },
     data() {
       return {
-        date:'',
+        date:[],
         houserule:{
           child:'',
           baby:'',
@@ -155,17 +155,18 @@
 
 
       next: function () {
+        const _this=this
         if (this.date == '') {
-          this.$message("请选择日期")
+          _this.$message("请选择日期")
           return
         }
         if ((this.houserule.child == '')||(this.houserule.baby == '')||(this.houserule.pets == '')
           ||(this.houserule.smoking == '')||(this.houserule.party == '')) {
-          this.$message("请选择房屋守则")
+          _this.$message("请选择房屋守则")
           return
         }
         if(this.numberValidateForm.price==''){
-          this.$message("请输入房子的价格")
+          _this.$message("请输入房子的价格")
           return
         }
         this.$axios({
@@ -173,10 +174,10 @@
           url: 'http://127.0.0.1:10010/api/item/house/addhouserule',
           data: this.houserule,
         }).then(function (response) {
-          if(response==1){
+          if(response.data==1){
 
           }else{
-            this.$message("会话超时")
+            _this.$message("addhouserule会话超时")
             setTimeout(function () {
               location.href="/addhouse00"
             },2000)
@@ -191,10 +192,10 @@
             price:this.numberValidateForm.price,
           }
         }).then(function (response) {
-          if(response==1){
-            this.dialogVisible=true
+          if(response.data==1){
+            _this.dialogVisible=true
           }else{
-            this.$message("会话超时")
+            _this.$message("addhouse02会话超时")
             setTimeout(function () {
               location.href="/addhouse00"
             },2000)
@@ -214,6 +215,36 @@
           .catch(_ => {
           });
       },
+    },mounted:function () {
+
+      const _this=this
+
+      this.$axios({
+        method:'post',
+        url:'http://127.0.0.1:10010/api/item/house/findhousehid'
+      }).then(function (response) {
+        if(response.data!=null){
+          console.log(response.data)
+          //_this.date='["'+response.data.startdate+'","'+response.data.enddate+'"]'
+          _this.date.push(response.data.startdate)
+          _this.date.push(response.data.enddate)
+          _this.numberValidateForm.price=response.data.price
+        }
+      })
+      this.$axios({
+        method:'post',
+        url:'http://127.0.0.1:10010/api/item/house/findhouserulehid'
+      }).then(function (response) {
+        if(response.data!=null){
+          console.log(response.data)
+          //_this.date='["'+response.data.startdate+'","'+response.data.enddate+'"]'
+          _this.houserule.child=response.data.child.toString()
+          _this.houserule.baby=response.data.baby.toString()
+          _this.houserule.pets=response.data.pets.toString()
+          _this.houserule.smoking=response.data.smoking.toString()
+          _this.houserule.party=response.data.party.toString()
+        }
+      })
     }
   }
 </script>

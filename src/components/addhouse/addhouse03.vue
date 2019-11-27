@@ -179,12 +179,10 @@
           wifi:0,
           desk:0,
           breakfast:0,
-
           fireextinguisher:0,
           coalarm:0,
           smokedetector:0,
           firstaidkit:0,
-
           kitchen:0,
           washingmachine:0,
           dryer:0,
@@ -214,7 +212,7 @@
           data: _this.houseinstallations,
 
         }).then(function (response) {
-          if(response==1){
+          if(response.data==1){
             location.href="/addhouse"
           }else{
             _this.$message("会话超时")
@@ -226,6 +224,40 @@
         //location.href="/addhouse"
       }
     },
+    mounted:function () {
+      const _this=this
+       this.$axios({
+         method:'post',
+         url:'http://127.0.0.1:10010/api/item/house/findhouseinstallationshid',
+       }).then(function (response) {
+         if(response.data!=null){
+           console.log(response.data)
+           _this.houseinstallations.needed=response.data.needed.toString()
+           _this.houseinstallations.airconditioner=response.data.airconditioner.toString()
+           _this.houseinstallations.heating=response.data.heating.toString()
+           _this.houseinstallations.hairdrier=response.data.hairdrier.toString()
+           _this.houseinstallations.iron=response.data.iron.toString()
+           _this.houseinstallations.television=response.data.television.toString()
+           _this.houseinstallations.independententry=response.data.independententry.toString()
+           _this.houseinstallations.shampoo=response.data.shampoo.toString()
+           _this.houseinstallations.wifi=response.data.wifi.toString()
+           _this.houseinstallations.desk=response.data.desk.toString()
+           _this.houseinstallations.breakfast=response.data.breakfast.toString()
+           _this.houseinstallations.fireextinguisher=response.data.fireextinguisher.toString()
+           _this.houseinstallations.coalarm=response.data.coalarm.toString()
+           _this.houseinstallations.smokedetector=response.data.smokedetector.toString()
+           _this.houseinstallations.firstaidkit=response.data.firstaidkit.toString()
+           _this.houseinstallations.kitchen=response.data.kitchen.toString()
+           _this.houseinstallations.washingmachine=response.data.washingmachine.toString()
+           _this.houseinstallations.dryer=response.data.dryer.toString()
+           _this.houseinstallations.parkingspace=response.data.parkingspace.toString()
+           _this.houseinstallations.gym=response.data.gym.toString()
+           _this.houseinstallations.swimmingpool=response.data.swimmingpool.toString()
+           _this.houseinstallations.bathtub=response.data.bathtub.toString()
+           _this.houseinstallations.elevator=response.data.elevator.toString()
+         }
+       })
+    }
   }
 </script>
 

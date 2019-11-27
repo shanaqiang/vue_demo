@@ -78,6 +78,7 @@
         location.href='/addhouse'
       },
       next:function () {
+        const _this=this
         if((this.hname=='')||(this.description=='')){
           this.$message({
             offset:400,
@@ -92,7 +93,8 @@
               description:this.description,
             }
           }).then(function (response) {
-            if(response==1){
+            console.log(response)
+            if(response.data==1){
               location.href="/addhouse12"
             }else{
               _this.$message("会话超时")
@@ -103,6 +105,20 @@
           })
         }
       }
+    },
+    mounted:function () {
+      const _this=this
+      this.$axios({
+        method: 'post',
+        url:'http://127.0.0.1:10010/api/item/house/findhousehid',
+        data:{},
+      }).then(function (response) {
+        if(response.data!=null){
+          _this.hname=response.data.hname
+          _this.description=response.data.description
+
+        }
+      })
     }
   }
 </script>

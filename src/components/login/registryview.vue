@@ -73,7 +73,7 @@
                         _this.user.mobilephone=""
                     }else if(response.data=="2"){
                         _this.$message("验证码发送成功");
-                        $("#aa").attr(disabled,true);
+                        $("#aa").attr("disabled",true);
                         var time=60
                         for(let a=60;a>0;a--){
                             setTimeout(function(){
@@ -82,50 +82,51 @@
                             },1000*a)
                         }
                         setTimeout(function(){
-                            $("#aa").attr(disabled,false)
+                            $("#aa").attr("disabled",false)
                             $("#aa").html("获取验证码")
                         },1000*60)
 
                     }
                 })
+            },
+            register:function(){
+                const _this=this
+                this.$axios({
+                    method: 'post',
+                    url: 'http://127.0.0.1:10010/api/item/front/register',
+                    data: {
+                        mobilephone:this.user.mobilephone,
+                        account:this.user.account,
+                        password:this.user.password,
+                        phoneCode:this.user.phoneCode
+                    }
+                }).then(function (response) {
+                    if(response.data=="0"){
+                        _this.$message("验证码已失效");
+                    }else if(response.data=="1"){
+                        _this.$message("账号已存在");
+                        _this.user.mobilephone="",
+                            _this.user.account="",
+                            _this.user.password="",
+                            _this.user.phoneCode=""
+                    }else if(response.data=="2"){
+                        _this.$message("注册成功");
+                        setTimeout(function(){
+                            location.href="/";
+                        })
+                    }else{
+                        _this.$message("注册失败,网络出了小差");
+                        _this.$message("账号已存在");
+                        _this.user.mobilephone="",
+                            _this.user.account="",
+                            _this.user.password="",
+                            _this.user.phoneCode=""
+                    }
+
+                })
             }
         },
-        register:function(){
-            const _this=this
-            this.$axios({
-                method: 'post',
-                url: 'http://127.0.0.1:10010/api/item/front/register',
-                data: {
-                    mobilephone:this.user.mobilephone,
-                    account:this.user.account,
-                    password:this.user.password,
-                    phoneCode:this.user.phoneCode
-                }
-            }).then(function (response) {
-                if(response.data="0"){
-                    _this.$message("验证码已失效");
-                }else if(response.data="1"){
-                    _this.$message("账号已存在");
-                    _this.user.mobilephone="",
-                     _this.user.account="",
-                      _this.user.password="",
-                      _this.user.phoneCode=""
-                }else if(response.data="2"){
-                    _this.$message("注册成功");
-                    setTimeout(function(){
-                        location.href="/";
-                    })
-                }else{
-                    _this.$message("注册失败,网络出了小差");
-                    _this.$message("账号已存在");
-                    _this.user.mobilephone="",
-                        _this.user.account="",
-                        _this.user.password="",
-                        _this.user.phoneCode=""
-                }
 
-            })
-        }
     };
 </script>
 

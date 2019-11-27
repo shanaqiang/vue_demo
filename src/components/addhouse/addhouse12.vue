@@ -22,6 +22,7 @@
             :on-success="uploaded"
             :on-preview="handlePictureCardPreview"
             :on-exceed="outlimit"
+            :file-list="hadimgs"
             :on-remove="handleRemove">
             <i class="el-icon-plus"></i>
           </el-upload>
@@ -61,6 +62,7 @@
         dialogImageUrl: '',
         dialogVisible: false,
         imgs:[],
+        hadimgs:[],
       };
     },
     methods: {
@@ -81,6 +83,7 @@
         location.href='/addhouse11'
       },
       next:function () {
+        const _this=this
         if(this.imgs==''){
           this.$message({
             offset:400,
@@ -95,18 +98,17 @@
             method: 'post',
             url: 'http://127.0.0.1:10010/api/item/house/addhouseimg',
             data: {
-              //arr:JSON.stringify(arr),
               arr:arr,
             }
           }).then(function (response) {
-            if(response==0){
-              this.$message({
+            if(response.data==0){
+              _this.$message({
                 offset:400,
                 message:"请求超时"
               });
             }
-            if(response==1){
-              this.$message({
+            if(response.data==1){
+              _this.$message({
                 offset:400,
                 message:"添加成功"
               });
@@ -118,6 +120,20 @@
         }
 
       }
+      },mounted:function () {
+      const _this=this
+        this.$axios({
+          method:'post',
+          url:'http://127.0.0.1:10010/api/item/house/findhouseimghid',
+          data:{}
+        }).then(function (response) {
+          console.log(response.data)
+          for(let i=0;i<response.data.length;i++){
+            console.log(response.data[i].img)
+            _this.hadimgs.push({url:response.data[i].img,response:response.data[i].img})
+            _this.imgs.push({response:response.data[i].img})
+          }
+        })
     }
   }
 </script>
