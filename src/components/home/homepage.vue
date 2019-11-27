@@ -16,35 +16,59 @@
       <div class="wrapper">
 
         <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups" style="margin-bottom: 60px">
-          <div class="btn-group mr-5" role="group" aria-label="First group">
-            <button type="button" class="btn btn-primary btn-lg" id="上海" @click="selecthouse($event)">上海</button>
+          <div class="btn-group mr-3" role="group" aria-label="First group">
+            <button style="width: 110px;height:50px;background-color: seagreen" class="btn " id="上海" @click="selecthouse($event)">
+              <div style="font-size: 18px;font-weight: bold;color: white">上 海</div></button>
           </div>
-          <div class="btn-group mr-5" role="group" aria-label="Second group">
-            <button type="button" class="btn btn-primary btn-lg" id="北京"@click="selecthouse($event)">北京</button>
+
+          <div class="btn-group mr-3" role="group" aria-label="Second group">
+            <button style="width: 110px;height:50px;background-color: seagreen" class="btn " id="北京"@click="selecthouse($event)">
+              <div style="font-size: 18px;font-weight: bold;color: white">北 京</div></button>
+            </button>
           </div>
-          <div class="btn-group mr-5" role="group" aria-label="Third group">
-            <button type="button" class="btn btn-primary btn-lg" id="成都" @click="selecthouse($event)">成都</button>
+
+          <div class="btn-group mr-3" role="group" aria-label="Second group">
+            <button style="width: 110px;height:50px;background-color: seagreen" class="btn " id="成都"@click="selecthouse($event)">
+              <div style="font-size: 18px;font-weight: bold;color: white">成 都</div></button>
+            </button>
           </div>
-          <div class="btn-group mr-5" role="group" aria-label="Third group">
-            <button type="button" class="btn btn-primary btn-lg" id="重庆"@click="selecthouse($event)">重庆</button>
+
+          <div class="btn-group mr-3" role="group" aria-label="Second group">
+            <button style="width: 110px;height:50px;background-color: seagreen" class="btn " id="重庆"@click="selecthouse($event)">
+              <div style="font-size: 18px;font-weight: bold;color: white">重 庆</div></button>
+            </button>
           </div>
-          <div class="btn-group mr-5" role="group" aria-label="Third group">
-            <button type="button" class="btn btn-primary btn-lg" id="杭州"@click="selecthouse($event)">杭州</button>
+
+          <div class="btn-group mr-3" role="group" aria-label="Second group">
+            <button style="width: 110px;height:50px;background-color: seagreen" class="btn " id="杭州"@click="selecthouse($event)">
+              <div style="font-size: 18px;font-weight: bold;color: white">杭 州</div></button>
+            </button>
           </div>
-          <div class="btn-group mr-5" role="group" aria-label="Third group">
-            <button type="button" class="btn btn-primary btn-lg" id="厦门"@click="selecthouse($event)">厦门</button>
+
+          <div class="btn-group mr-3" role="group" aria-label="Second group">
+            <button style="width: 110px;height:50px;background-color: seagreen" class="btn " id="厦门"@click="selecthouse($event)">
+              <div style="font-size: 18px;font-weight: bold;color: white">厦 门</div></button>
+            </button>
           </div>
-          <div class="btn-group mr-5" role="group" aria-label="Third group">
-            <button type="button" class="btn btn-primary btn-lg" id="苏州"@click="selecthouse($event)">苏州</button>
+
+          <div class="btn-group mr-3" role="group" aria-label="Second group">
+            <button style="width: 110px;height:50px;background-color: seagreen" class="btn " id="苏州"@click="selecthouse($event)">
+              <div style="font-size: 18px;font-weight: bold;color: white">苏 州</div></button>
+            </button>
           </div>
-          <div class="btn-group mr-5" role="group" aria-label="Third group">
-            <button type="button" class="btn btn-primary btn-lg" id="南京"@click="selecthouse($event)">南京</button>
+
+          <div class="btn-group mr-3" role="group" aria-label="Second group">
+            <button style="width: 110px;height:50px;background-color: seagreen" class="btn " id="南京"@click="selecthouse($event)">
+              <div style="font-size: 18px;font-weight: bold;color: white">南 京</div></button>
+            </button>
           </div>
+
+
         </div>
 
         <ul class="properties_list">
           <li v-for="h in houselist">
-            <div class="card" @click="toone(h.hid)" style="width: 22rem; height: 30rem">
+            <div class="card" @click="toone(h.hid)" style="width: 22rem; height: 30rem;padding: 20px;">
               <img class="card-img-top" style="height: 280px" :src="h.img" alt="Card image cap" />
               <div class="card-body">
                 <div style="font-size: 15px;line-height: 20px;text-align: left;color: brown" v-if="h.housetype==0">整套公寓·{{h.bednum}}张床</div>
@@ -58,9 +82,9 @@
             </div>
           </li>
         </ul>
-        <div class="more_listing">
+        <!--<div class="more_listing">
           <a href="#" class="more_listing_btn">View More Listings</a>
-        </div>
+        </div>-->
       </div>
     </section>	<!--  end listing section  -->
 
@@ -69,11 +93,11 @@
         <ul>
           <li class="links">
             <ul>
-              <li><a href="#">About</a></li>
-              <li><a href="#">Support</a></li>
-              <li><a href="#">Terms</a></li>
+              <li><a href="#">关于</a></li>
+              <li><a href="#">支持</a></li>
+              <li><a href="#">项目</a></li>
               <li><a href="#">Policy</a></li>
-              <li><a href="#">Contact</a></li>
+              <li><a href="#">联系</a></li>
             </ul>
           </li>
 
@@ -193,6 +217,9 @@
   .row-bg {
     padding: 10px 0;
     background-color: #f9fafc;
+  }
+  .card{
+    cursor: pointer;
   }
 
 </style>
