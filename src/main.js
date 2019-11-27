@@ -51,6 +51,7 @@ import AddHouse21 from './components/addhouse/addhouse21'
 import AddHouse00 from './components/addhouse/addhouse00'
 import Reserve from './components/reserve/reserveview'
 import Test from './components/test'
+import TestVue from './components/test/testvue'
 const router=new Router({
   routes:[
     {path:"/",component:Home},
@@ -70,6 +71,7 @@ const router=new Router({
     {path:"/addhouse00",component:AddHouse00},
     {path:"/myInfo",component:MyInfo},
     {path:"/reserve",component:Reserve},
+    {path:"/testvue",component:TestVue},
   ],
   mode:"history"
 })

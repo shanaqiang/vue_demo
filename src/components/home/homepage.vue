@@ -4,11 +4,10 @@
       <top></top>
 
       <section class="caption">
-        <h2 class="caption">Find You Dream Home</h2>
-        <h3 class="properties">Appartements - Houses - Mansions</h3>
-      </section>
+      <h2 class="caption">Find You Dream Home</h2>
+      <h3 class="properties">Appartements - Houses - Mansions</h3>
+    </section>
     </section><!--  end hero section  -->
-
 
 
 

@@ -367,7 +367,9 @@
           installistlength:{},//房屋设施数量
           value1:'',        //日期选择
           num1:1,
-          pickerOptions: {}
+          pickerOptions: {},
+          startdate:[],
+          enddate:[]
         }
       },
       created(){
@@ -384,9 +386,13 @@
         this.drawmap();
         //this.getStartAndEndDate();
       },
+
       methods:{
         getdatevalue(){    //点击预定
-          alert((value1[1]-value1[0])*(housedetail.price)/86400000);
+          alert(new Date("2019-12-26"));
+          alert(new Date(this.housedetail.enddate));
+          alert(this.housedetail.enddate);
+          alert(this.value1[0]);
         },
         gethid(){
           this.hid=this.$route.query.hid;
@@ -396,9 +402,8 @@
             method:'get',
             url:'http://127.0.0.1:10010/api/item/house/housedetail/'+this.hid
           }).then(resp=>{
-             // console.log(resp);
+             //console.log(resp);
              this.housedetail=resp.data;
-             this.location1=resp.data.location;
              for(var i=1;i<=resp.data.maxtenant;i++){
                this.tenant.push(i);
              }
@@ -480,14 +485,27 @@
           })
         },
         selectdate(){
-          // console.log(this.housedetail.startdate);
-          // alert(this.housedetail.enddate);
-          this.pickerOptions = {
-            disabledDate(time) {
-              return time.getTime() < Date.now() - 8.64e7;
-            // return time.getTime()<new Date(this.housedetail.enddate).getTime();
+          this.$axios({
+            method:'get',
+            url:'http://127.0.0.1:10010/api/item/house/alldate/'+this.hid
+          }).then(resp=>{
+            console.log(resp);
+            this.pickerOptions = {
+              disabledDate(time) {
+                for(var i=1;i<resp.data.length;i++){
+                  if(time.getTime()>new Date(resp.data[0].enddate)||
+                    time.getTime()<new Date(resp.data[0].startdate)||
+                    (time.getTime()>new Date(resp.data[i].startdate)- 8.64e7&&
+                      time.getTime()<new Date(resp.data[i].enddate))){
+                    return true;
+                  }
+
+                }
+
+              }
             }
-          }
+          })
+
         },
         drawmap: function () {
           this.$axios({

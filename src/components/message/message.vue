@@ -154,7 +154,22 @@
         })
       },
       send(){
+
         alert(this.textarea)
+        // this.$axios({
+        //   method:'post',
+        //   url:'http://127.0.0.1:10010/api/item/house/message/',
+        //   data:{
+        //     uid:this.housedetail.uid,
+        //     hid:this.hid,
+        //     message:this.textarea
+        //   }
+        // }).then(resp=>{
+        //   //console.log(resp);
+        //   this.housecommentcount=resp.data;
+        //   this.clickselectmore=Math.ceil((resp.data-this.number)/this.number);
+        //
+        // })
       }
     }
 
