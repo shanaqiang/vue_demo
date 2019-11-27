@@ -107,7 +107,7 @@
                 }else if(response.data="1"){
                     _this.$message("账号已存在");
                     _this.user.mobilephone="",
-                     _this.user.account="",
+                      _this.user.account="",
                       _this.user.password="",
                       _this.user.phoneCode=""
                 }else if(response.data="2"){

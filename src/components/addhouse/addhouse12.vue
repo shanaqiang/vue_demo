@@ -22,6 +22,7 @@
             :on-success="uploaded"
             :on-preview="handlePictureCardPreview"
             :on-exceed="outlimit"
+            :file-list="hadimgs"
             :on-remove="handleRemove">
             <i class="el-icon-plus"></i>
           </el-upload>
@@ -61,6 +62,7 @@
         dialogImageUrl: '',
         dialogVisible: false,
         imgs:[],
+        hadimgs:[],
       };
     },
     methods: {
@@ -118,6 +120,20 @@
         }
 
       }
+      },mounted:function () {
+      const _this=this
+        this.$axios({
+          method:'post',
+          url:'http://127.0.0.1:10010/api/item/house/findhouseimghid',
+          data:{}
+        }).then(function (response) {
+          console.log(response.data)
+          for(let i=0;i<response.data.length;i++){
+            console.log(response.data[i].img)
+            _this.hadimgs.push({url:response.data[i].img,response:response.data[i].img})
+            _this.imgs.push({response:response.data[i].img})
+          }
+        })
     }
   }
 </script>

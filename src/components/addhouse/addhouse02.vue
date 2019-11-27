@@ -194,8 +194,10 @@
 
       //百度地图部分
       drawmap: function () {
+        this.location1=this.city+this.address
+        console.log(this.location1)
         // 百度地图API功能
-        console.log(this.$refs.allmap)
+        //console.log(this.$refs.allmap)
         // let amap = this.$refs.allmap
         var map = new BMap.Map("allmap");
         var point = new BMap.Point(116.331398, 39.897445);
@@ -210,7 +212,7 @@
           }else{
             alert("您选择地址没有解析到结果!");
           }
-        }, "北京市");
+        },CodeToText[this.selectedOptions[0]]);
       },
     },
     mounted: function(){
@@ -222,8 +224,8 @@
         data:{},
       }).then(function (response) {
         if(response.data!=null){
-          console.log(response)
           let code=_this.convertTextToCode(response.data.province,response.data.city,response.data.yard)
+          _this.city=response.data.province+response.data.city+response.data.yard
           let cod=code.split(",")
           let arr=new Array()
           arr.push(cod[0].trim())
